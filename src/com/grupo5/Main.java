@@ -13,13 +13,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String texto = sc.nextLine();
         String prueba = getContentOfFile(texto);
-        System.out.println(prueba);
-//        System.out.println(prueba.length());
-        prueba.trim();
-        prueba.replaceAll("\\s", "");
+        prueba.trim(); //QUITAMOS LOS ESPACIOS
+//        prueba.replaceAll("\\s", "");
         String s = prueba.replace(" ", "");
         System.out.println(s);
 
+//--------------------------------------SELCCION DE OPCIONES (SWITCH)-------------------------------------------
+       
         System.out.println("SELECCIONE UNA DE LAS SIGUIENTES OPCIONES \n1-> SUMA DE MATRICES \n2-> RESTA DE MATRICES"
                 + "\n3-> MULTIPLICACION DE MATRICES \n4-> DIVIDIR MATRICES \n5-> TRANSPUESTA DE LA MATRIZ"
                 + "\n6-> MATRIZ INVERSA \n7-> POTENCIA DE UNA MATRIZ \n8-> DETERMINANTE DE UNA MATRIZ");
@@ -28,6 +28,8 @@ public class Main {
         String op = opcion.nextLine();
 
         switch (op) {
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
             case "1":
                 System.out.println("------SUMA DE MATRICES------");
                 //Scanner llamarMatriz = new Scanner(System.in);
@@ -49,6 +51,7 @@ public class Main {
                     for (int j = 0; j < matriz1[i].length; j++) {
                         matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
                     }
+                    
                 }
                 
                 //IMPRIMIR MATRIZ SUMA
@@ -62,35 +65,59 @@ public class Main {
                     System.out.println("");
                 }
                 break;
+ 
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------                
                 
             case "2":
-                System.out.println("Resta");
+                System.out.println("------RESTA DE MATRICES------");
                 break;
 
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------                
+                
             case "3":
-                System.out.println("Multiplicacion");
+                System.out.println("------MULTIPLICACION DE MATRICES------");
                 break;
 
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------                
+                
             case "4":
-                System.out.println("Dividir");
+                System.out.println("------DIVISION DE MATRICES------");
                 break;
-
+                
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+                
             case "5":
-                System.out.println("Transpuesta");
+                System.out.println("------TRANSPUESTA DE LA MATRIZ------");
                 break;
-
+                
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+                
             case "6":
-                System.out.println("Inversa");
+                System.out.println("------INVERSA DE LA MATRIZ------");
                 break;
-
+                
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+                
             case "7":
-                System.out.println("Transpuesta");
+                System.out.println("------POTENCIA DE LA MATRIZ------");
                 break;
-
+                
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+                
             case "8":
-                System.out.println("Determinante");
+                System.out.println("------DETERMINANTE DE LA MATRIZ------");
                 break;
-
+                
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+                
             default:
                 System.out.println("SELECCIONE UNA DE LAS OPCIONES");
                 break;
@@ -133,16 +160,17 @@ public class Main {
         return "";
     }
 
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------    
+    
     public static int[][] leer_matriz(String archivo, char identificador) {
         char a[] = archivo.toCharArray();
 
-        boolean encontrado = false;
         int indice = 0;
         for (int i = 0; i < a.length; i++) {
             if (a[i] == identificador) {
 
                 indice = i;
-                encontrado = true;
             }
         }
         int columnas = 0;
@@ -177,12 +205,10 @@ public class Main {
         System.out.println("Columnas= " + columnas);
         System.out.println("Filas = " + filas);
         for (int i = 0; i < matriz.length; i++) {
-//            System.out.println("fila");
             auxiliar++;
 
             for (int j = 0; j < matriz[0].length; j++) {
                 if (a[auxiliar] == ';') {
-                    System.out.println("break");
                     break;
                 }
                 if (Character.isDigit(a[auxiliar])) {
