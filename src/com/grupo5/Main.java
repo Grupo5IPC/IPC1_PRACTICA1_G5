@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Main {
+    
+    public static Scanner Escribir = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -28,10 +30,37 @@ public class Main {
         switch (op) {
             case "1":
                 System.out.println("------SUMA DE MATRICES------");
-                System.out.println("INGRESE LA LETRA DE LA MATRIZ QUE DESEA LLAMAR");
-//            Scanner llamarMatriz = new Scanner(System.in);
-//        String llamada = opcion.nextLine();
-                int[][] matriz = leer_matriz(s, 'C');
+                //Scanner llamarMatriz = new Scanner(System.in);
+                //String llamada = opcion.nextLine();
+                
+                //MATRIZ 1
+                System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
+                char Letra = Escribir.next().charAt(0);
+                int[][] matriz1 = leer_matriz(s, Letra);;
+                
+                //MATRIZ 2
+                System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
+                char Letra2 = Escribir.next().charAt(0);
+                int[][] matriz2 = leer_matriz(s, Letra2);;
+                
+                //SUMA
+                int[][] matrizR = new int[3][3];
+                for (int i = 0; i < matriz1.length; i++) {
+                    for (int j = 0; j < matriz1[i].length; j++) {
+                        matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
+                    }
+                }
+                
+                //IMPRIMIR MATRIZ SUMA
+                System.out.println("");
+                System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+                System.out.println("");
+                for (int i = 0; i < matrizR.length; i++) {
+                    for (int j = 0; j < matrizR[i].length; j++) {
+                        System.out.print(matrizR[i][j] + "\t");
+                    }
+                    System.out.println("");
+                }
                 break;
                 
             case "2":
@@ -176,3 +205,4 @@ public class Main {
 
     }
 }
+
