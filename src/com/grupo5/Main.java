@@ -1,20 +1,121 @@
 package com.grupo5;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
+
+
 public class Main {
 
+    public static Scanner Escribir = new Scanner(System.in);
+    public static String s = "";
+    public static Reportes rep = new Reportes();
+    public static String op ="";
     public static void main(String[] args) {
-	// write your code here
-        String prueba = getContentOfFile("C:\\Users\\ludwi\\OneDrive\\Escritorio\\prueba.txt");
-        System.out.println(prueba);
-        System.out.println(prueba.length());
-        prueba.trim();
-        prueba.replaceAll("\\s", "");
-        String s = prueba.replace(" ", "");
+
+        Animacion();
+        System.out.println("INGRESE EL NOMBRE DEL ARCHIVO QUE CONTIENE LAS MATRICES");
+        Scanner sc = new Scanner(System.in);
+        String texto = sc.nextLine();
+        String prueba = getContentOfFile(texto);
+        prueba.trim(); //QUITAMOS LOS ESPACIOS
+        s = prueba.replace(" ", "");
         System.out.println(s);
-        int [][] matriz = leer_matriz(s,'C');;
+
+//--------------------------------------SELECCION DE OPCIONES (SWITCH)-------------------------------------------
+        do {
+            System.out.println("SELECCIONE UNA DE LAS SIGUIENTES OPCIONES \n1-> SUMA DE MATRICES \n2-> RESTA DE MATRICES"
+                    + "\n3-> MULTIPLICACION DE MATRICES \n4-> DIVIDIR MATRICES \n5-> TRANSPUESTA DE LA MATRIZ"
+                    + "\n6-> MATRIZ INVERSA \n7-> POTENCIA DE UNA MATRIZ \n8-> DETERMINANTE DE UNA MATRIZ \n0-> SALIR");
+
+            Scanner opcion = new Scanner(System.in);
+            op = opcion.nextLine();
+
+            switch (op) {
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "1":
+                    System.out.println("------SUMA DE MATRICES------");
+                    suma_matriz();
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "2":
+                    System.out.println("------RESTA DE MATRICES------");
+                    resta_matriz();
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "3":
+                    System.out.println("------MULTIPLICACION DE MATRICES------");
+                    System.out.println("SELECCIONE UNA DE LAS SIGUIENTES OPCIONES \n1-> MULTIPLICAIÓN DE MATRICES \n2-> MULTIPLICACIÓN DE MATRIZ CON UN NUMERO");
+                    Scanner scanner = new Scanner(System.in);
+                    String option = scanner.nextLine();
+                    switch (option) {
+                        case "1":
+                            MultiplicaciondeMatrices();
+                            break;
+                        case "2":
+                            MultiplicacionMatrizNumero();
+                            break;
+                    }
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "4":
+                    System.out.println("------DIVISION DE MATRICES------");
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "5":
+                    System.out.println("------TRANSPUESTA DE LA MATRIZ------");
+                    Transpuesta();
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "6":
+                    System.out.println("------INVERSA DE LA MATRIZ------");
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "7":
+                    System.out.println("------POTENCIA DE LA MATRIZ------");
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                case "8":
+                    System.out.println("------DETERMINANTE DE LA MATRIZ------");
+                    break;
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+                default:
+                    System.out.println("SELECCIONE UNA DE LAS OPCIONES");
+                    break;
+            }
+        }while (op != "0");
 
 
     }
+
+
     public static String getContentOfFile(String pathname) {
         File archive = null;
         FileReader fr = null;
@@ -43,81 +144,295 @@ public class Main {
                 if (null != fr) {
                     fr.close();
                 }
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            } catch (NullPointerException e) {
+                System.out.println(e.toString() + "No ha seleccionado ningún archivo");
+            } catch (Exception e) {
+                System.out.println(e.toString());
             }
         }
         return "";
     }
-    public static int[][] leer_matriz(String archivo, char identificador){
-        char a[] = archivo.toCharArray();
+
+    public static int[][] leer_matriz(String archivo, char identificador) {
+
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+
+        String[] matrices = archivo.split("\n");
+        for (int i = 0; i < matrices.length; i++) {
+            System.out.println(matrices[i]);
+        }
 
         boolean encontrado = false;
-        int indice =0;
-        for (int i = 0;i<a.length; i++){
-            if(a[i] == identificador){
-
-                indice = i;
-                encontrado = true;
-            }
-        }
-        int columnas = 0;
-        int filas =0;
-        for (int i = indice; i<a.length; i++){
-            if (a[i] == '\n'){
-                filas++;
+        int indice = 0;
+        for (int i = 0; i < matrices.length; i++) {
+            char a[] = matrices[i].toCharArray();
+            if (encontrado == true) {
                 break;
-            }
-
-            if(a[i] == ':'){
-
-                for (int j=i+1; j<a.length; j++){
-                    if (a[j] == ';'){
-                        break;
-                    }
-                    if(a[j] != ',' ) {
-                        columnas++;
-                    }
-
-                }
 
             }
-            if (a[i] == ';'){
-                filas ++;
-            }
-        }
-        int [][] matriz = new int[filas][columnas];
-        int auxiliar =indice+1;
-
-        System.out.println("Matriz = " +  identificador);
-        System.out.println("Columnas= "+columnas);
-        System.out.println("Filas = "+ filas);
-        for (int i = 0; i<matriz.length;i++){
-            System.out.println("fila");
-            auxiliar++;
-
-            for (int j = 0; j<matriz[0].length; j++){
-                if (a[auxiliar] == ';'){
-                    System.out.println("break");
+            for (int j = 0; j < a.length; j++) {
+                if (a[j] == identificador) {
+                    encontrado = true;
+                    indice = i;
                     break;
                 }
-                if (Character.isDigit(a[auxiliar])){
-                    matriz[i][j] = Character.getNumericValue(a[auxiliar]);
-                }else{
-                    j--;
+
+            }
+            for (int j = 0; j < a.length; j++) {
+                if (a[j] == identificador) {
+                    encontrado = true;
+                    indice = i;
+                    break;
                 }
-                auxiliar++;
+            }
+        }
+        System.out.println();
+
+
+        String tmp[] = matrices[indice].split(";");
+        tmp[0] = tmp[0].replace(identificador + ":", "");
+        int filas = tmp.length;
+        System.out.println(filas);
+
+        int columnas = tmp[0].split(",").length;
+        System.out.println(columnas);
+        int matriz[][] = new int[filas][columnas];
+        for (int i = 0; i < tmp.length; i++) {
+            String celdas[] = tmp[i].split(",");
+            for (int j = 0; j < celdas.length; j++) {
+                matriz[i][j] = Integer.parseInt(celdas[j]);
             }
 
         }
-        for (int i = 0; i<matriz.length;i++){
-            for (int j = 0; j<matriz[0].length; j++){
-                System.out.print(matriz[i][j]+ ",");
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.print(matriz[i][j] + ",");
             }
             System.out.println();
         }
-
-    return matriz;
+        return matriz;
 
     }
+
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+    public static int[][] suma_matriz() {
+        //MATRIZ 1
+        System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+        //MATRIZ 2
+        System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
+        char Letra2 = Escribir.next().charAt(0);
+        int[][] matriz2 = leer_matriz(s, Letra2);
+
+        //SUMA
+        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
+            }
+
+        }
+
+        //IMPRIMIR MATRIZ SUMA
+        System.out.println("");
+        System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+        System.out.println("");
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR[i].length; j++) {
+                System.out.print(matrizR[i][j] + "\t");
+
+            }
+            System.out.println("");
+        }
+
+        System.out.println();
+        rep.add_suma(matriz1, matriz2,matrizR,Letra, Letra2);
+
+        return matrizR;
+
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+    public static int[][] resta_matriz() {
+        //MATRIZ 1
+        System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+        //MATRIZ 2
+        System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
+        char Letra2 = Escribir.next().charAt(0);
+        int[][] matriz2 = leer_matriz(s, Letra2);
+
+        //RESTA
+        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                matrizR[i][j] = matriz1[i][j] - matriz2[i][j];
+
+            }
+
+        }
+
+
+        //IMPRIMIR MATRIZ SUMA
+        System.out.println("");
+        System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
+        System.out.println("");
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR[i].length; j++) {
+                System.out.print(matrizR[i][j] + "\t");
+
+            }
+            System.out.println("");
+        }
+        rep.add_resta(matriz1, matriz2,matrizR,Letra, Letra2);
+
+        return matrizR;
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+    public static int[][] MultiplicaciondeMatrices() {
+        //MATRIZ 1
+        System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+        //MATRIZ 2
+        System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
+        char Letra2 = Escribir.next().charAt(0);
+        int[][] matriz2 = leer_matriz(s, Letra2);
+
+        //MULTIPLICACIÓN
+        int[][] matrizR = new int[3][3];
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                matrizR[i][j] += matriz1[i][j] * matriz2[j][i];
+            }
+
+        }
+
+        //IMPRIMIR MATRIZ MULTIPLICACIÓN
+        System.out.println("");
+        System.out.println("La multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
+        System.out.println("");
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR[i].length; j++) {
+                System.out.print(matrizR[i][j] + "\t");
+            }
+            System.out.println("");
+        }
+        rep.add_multi_matriz(matriz1, matriz2,matrizR,Letra, Letra2);
+        return matrizR;
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+
+    public static int[][] MultiplicacionMatrizNumero() {
+        //MATRIZ 1
+        System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+        //MATRIZ 2
+        System.out.println("Ingrese un número para operar con la matriz seleccionada: ");
+        int Numero = Escribir.nextInt();
+
+        //MULTIPLICACIÓN
+
+        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                matrizR[i][j] = matriz1[i][j] * Numero;
+            }
+
+        }
+
+        //IMPRIMIR MATRIZ MULTIPLICADA CON EL NUMERO
+        System.out.println("");
+        System.out.println("La multiplicacion de la matriz " + Letra + " con el número " + Numero + " es:");
+        System.out.println("");
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR[i].length; j++) {
+                System.out.print(matrizR[i][j] + "\t");
+            }
+            System.out.println("");
+        }
+        rep.add_multi_numero(matriz1,matrizR,Letra, Numero);
+        return matrizR;
+    }
+
+    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    public static int[][] Transpuesta() {
+        //MATRIZ 1
+        System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+
+        //TRANSPUESTA
+
+        int matrizR[][] = new int [matriz1.length][matriz1[0].length];
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR.length; j++) {
+                matrizR[i][j] = matriz1[j][i];
+
+            }
+        }
+
+        //IMPRIMIR MATRIZ MULTIPLICADA CON EL NUMERO
+        System.out.println("");
+        System.out.println("La transpuesta de la matriz " + Letra + " es:");
+        System.out.println("");
+        for (int i = 0; i < matrizR.length; i++) {
+            for (int j = 0; j < matrizR[i].length; j++) {
+                System.out.print(matrizR[i][j] + "\t");
+            }
+            System.out.println("");
+        }
+        rep.add_transpuesta(matriz1,matrizR, Letra);
+        return matrizR;
+    }
+
+    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    public static void Animacion(){
+
+        try {
+            System.out.println("  __  __              _______             _____              _         _____ ");
+            Thread.sleep(200);
+            System.out.println(" |  \\/  |     /\\     |__   __|           / ____|     /\\     | |       / ____|");
+            Thread.sleep(200);
+            System.out.println(" | \\  / |    /  \\       | |     ______  | |         /  \\    | |      | |     ");
+            Thread.sleep(200);
+            System.out.println(" | |\\/| |   / /\\ \\      | |    |______| | |        / /\\ \\   | |      | |     ");
+            Thread.sleep(200);
+            System.out.println(" | |  | |  / ____ \\     | |             | |____   / ____ \\  | |____  | |____ ");
+            Thread.sleep(200);
+            System.out.println(" |_|  |_| /_/    \\_\\    |_|              \\_____| /_/    \\_\\ |______|  \\_____|");
+            Thread.sleep(200);
+            System.out.println();
+            System.out.print("\007");
+            System.out.flush();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
