@@ -14,12 +14,12 @@ public class Reportes {
 
     public Reportes() {
         Calendar fecha = Calendar.getInstance();
-        int año = fecha.get(Calendar.YEAR);
+        int year = fecha.get(Calendar.YEAR);
         int mes = fecha.get(Calendar.MONTH);
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         int hora = fecha.get(Calendar.HOUR_OF_DAY);
         int minutos = fecha.get(Calendar.MINUTE);
-        n_reporte = dia + "-" + mes + "-" + año + " " + hora + "." + minutos;
+        n_reporte = dia + "-" + mes + "-" + year + " " + hora + "." + minutos;
         try {
             File directorio = new File("Reportes");
             if (!directorio.exists()) {
