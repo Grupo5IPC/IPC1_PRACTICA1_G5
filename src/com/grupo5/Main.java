@@ -12,6 +12,7 @@ public class Main {
     public static String s = "";
     public static Reportes rep = new Reportes();
     public static String op ="";
+    
     public static void main(String[] args) {
 
         Animacion();
@@ -59,7 +60,7 @@ public class Main {
                     String option = scanner.nextLine();
                     switch (option) {
                         case "1":
-                            MultiplicaciondeMatrices();
+                            //MultiplicaciondeMatrices();
                             break;
                         case "2":
                             MultiplicacionMatrizNumero();
@@ -87,6 +88,7 @@ public class Main {
 
                 case "6":
                     System.out.println("------INVERSA DE LA MATRIZ------");
+                    InversadeMatrices();
                     break;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -101,6 +103,7 @@ public class Main {
 
                 case "8":
                     System.out.println("------DETERMINANTE DE LA MATRIZ------");
+                    Determinante();
                     break;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -114,8 +117,9 @@ public class Main {
 
 
     }
-
-
+    
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
     public static String getContentOfFile(String pathname) {
         File archive = null;
         FileReader fr = null;
@@ -152,7 +156,9 @@ public class Main {
         }
         return "";
     }
-
+    
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
     public static int[][] leer_matriz(String archivo, char identificador) {
 
 
@@ -376,7 +382,7 @@ public class Main {
         return matrizR;
     }
 
-    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
     public static int[][] Transpuesta() {
         //MATRIZ 1
@@ -409,7 +415,7 @@ public class Main {
         return matrizR;
     }
 
-    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
     public static void Animacion(){
 
@@ -434,5 +440,161 @@ public class Main {
         }
 
     }
+    
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    public static int[][] InversadeMatrices() {
+        //MATRIZ
+        System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
 
+        //--------------------------DETERMINANTE--------------------------
+        //DIAGONALES POSITIVAS
+        int[][] matrizT = new int[matriz1.length][matriz1[0].length];
+        int Diagonal = 1;
+        int Diagonal2 = 1;
+        int Diagonal3 = 1;
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                if (i == j) {
+                    Diagonal *= matriz1[i][j];
+                }
+                if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
+                    Diagonal2 *= matriz1[i][j];
+                }
+                if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
+                    Diagonal3 *= matriz1[i][j];
+                }
+            }
+        }
+
+        //DIAGONALES CONTRARIAS
+        int Diagonal4 = 1;
+        int Diagonal5 = 1;
+        int Diagonal6 = 1;
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
+                    Diagonal4 *= matriz1[i][j];
+                }
+                if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
+                    Diagonal5 *= matriz1[i][j];
+                }
+                if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
+                    Diagonal6 *= matriz1[i][j];
+                }
+            }
+        }
+
+        double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
+        if (Det == 0) {
+            System.out.println("La matriz ingresada no tiene inversa porque su determinante es cero");
+        } else {
+
+            //--------------------------TRANSPUESTA--------------------------
+            
+            for (int i = 0; i < matriz1.length; i++) {
+                for (int j = 0; j < matriz1[i].length; j++) {
+                    matrizT[i][j] = matriz1[j][i];
+                }
+            }
+            
+            //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
+            
+            int[][] matrizAdj = new int[matrizT.length][matrizT[0].length];
+            for (int i = 0; i < matrizT.length; i++) {
+                for (int j = 0; j < matrizT[i].length; j++) {
+                    if  (i==0 && j==0) {
+                        matrizAdj[i][j] = ((matrizT[1][1] * matrizT[2][2])-(matrizT[1][2] * matrizT[2][1]));
+                    }if (i==0 && j==1) {
+                        matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][2])-(matrizT[1][2] * matrizT[2][0]))*(-1);
+                    }if (i==0 && j==2) {
+                        matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][1])-(matrizT[1][1] * matrizT[2][0]));
+                    }if (i==1 && j==0) {
+                        matrizAdj[i][j] = ((matrizT[0][1] * matrizT[2][2])-(matrizT[0][2] * matrizT[2][1]))*(-1);
+                    }if (i==1 && j==1) {
+                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][2])-(matrizT[0][2] * matrizT[2][0]));
+                    }if (i==1 && j==2) {
+                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][1])-(matrizT[0][1] * matrizT[2][0]))*(-1);
+                    }if (i==2 && j==0) {
+                        matrizAdj[i][j] = ((matrizT[0][1] * matrizT[1][2])-(matrizT[0][2] * matrizT[1][1]));
+                    }if (i==2 && j==1) {
+                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][2])-(matrizT[0][2] * matrizT[1][0]))*(-1);
+                    }if (i==2 && j==2) {
+                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][1])-(matrizT[0][1] * matrizT[1][0]));
+                    }
+                }
+            }
+            //-------------------ADJUNTA DIVIDIDA POR DETERMINANTE = INVERSA-------------------
+            double[][] matrizInv = new double[matrizAdj.length][matrizAdj[0].length];
+            for (int i = 0; i < matrizAdj.length; i++) {
+                for (int j = 0; j < matrizAdj[i].length; j++) {
+                    matrizInv[i][j] = (double)(matrizAdj[i][j]/Det);
+                }
+            }
+            System.out.println("\n La Matriz Inversa de " + Letra + " es: ");
+            System.out.println("");
+            for (int i = 0; i < matrizInv.length; i++) {
+                for (int j = 0; j < matrizInv[i].length; j++) {
+                    System.out.print(matrizInv[i][j] + "\t");
+                }
+                System.out.println("");
+            }
+            System.out.println("");
+        }
+        return matrizT;
+    }
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    public static int[][] Determinante(){
+        //MATRIZ
+        System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+
+        //--------------------------DETERMINANTE--------------------------
+        //DIAGONALES POSITIVAS
+        int[][] matrizT = new int[matriz1.length][matriz1[0].length];
+        int Diagonal = 1;
+        int Diagonal2 = 1;
+        int Diagonal3 = 1;
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                if (i == j) {
+                    Diagonal *= matriz1[i][j];
+                }
+                if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
+                    Diagonal2 *= matriz1[i][j];
+                }
+                if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
+                    Diagonal3 *= matriz1[i][j];
+                }
+            }
+        }
+
+        //DIAGONALES CONTRARIAS
+        int Diagonal4 = 1;
+        int Diagonal5 = 1;
+        int Diagonal6 = 1;
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+                if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
+                    Diagonal4 *= matriz1[i][j];
+                }
+                if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
+                    Diagonal5 *= matriz1[i][j];
+                }
+                if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
+                    Diagonal6 *= matriz1[i][j];
+                }
+            }
+        }
+
+        double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
+        System.out.println("\n El Determinante de la matriz " + Letra + " es = " + Det);
+        System.out.println("");
+        return null;
+    }
 }
