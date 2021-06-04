@@ -11,7 +11,7 @@ public class Main {
         prueba.trim();
         prueba.replaceAll("\\s", "");
         String s = prueba.replace(" ", "");
-        int [][] matriz = leer_matriz(s,'A');;
+        int [][] matriz = leer_matriz(s,'R');;
 
     }
     public static String getContentOfFile(String pathname) {
@@ -72,11 +72,15 @@ public class Main {
         System.out.println();
 
 
-        int matriz[][] = new int[3][3];
+
         String tmp[] = matrices[indice].split(";");
         tmp[0] = tmp[0].replace(identificador + ":", "");
+        int filas = tmp.length;
+        System.out.println(filas);
 
-
+        int columnas = tmp[0].split(",").length;
+        System.out.println(columnas);
+        int matriz[][] = new int[filas][columnas];
         for (int i = 0;i< tmp.length; i++){
             String celdas []= tmp[i].split(",");
             for (int j =0; j<celdas.length; j++){
