@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     
     public static Scanner Escribir = new Scanner(System.in);
-
+    Public String s = "";
     public static void main(String[] args) {
 
         System.out.println("INGRESE EL NOMBRE DEL ARCHIVO QUE CONTIENE LAS MATRICES");
@@ -15,7 +15,7 @@ public class Main {
         String prueba = getContentOfFile(texto);
         prueba.trim(); //QUITAMOS LOS ESPACIOS
 //        prueba.replaceAll("\\s", "");
-        String s = prueba.replace(" ", "");
+        s = prueba.replace(" ", "");
         System.out.println(s);
 
 //--------------------------------------SELCCION DE OPCIONES (SWITCH)-------------------------------------------
