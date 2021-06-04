@@ -1,17 +1,18 @@
 package com.grupo5;
 import java.io.*;
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
+	// write your code here
         String prueba = getContentOfFile("C:\\Users\\ludwi\\OneDrive\\Escritorio\\prueba.txt");
-
+        System.out.println(prueba);
+        System.out.println(prueba.length());
         prueba.trim();
         prueba.replaceAll("\\s", "");
         String s = prueba.replace(" ", "");
-        int [][] matriz = leer_matriz(s,'R');;
+        System.out.println(s);
+        int [][] matriz = leer_matriz(s,'C');;
+
 
     }
     public static String getContentOfFile(String pathname) {
@@ -49,52 +50,73 @@ public class Main {
         return "";
     }
     public static int[][] leer_matriz(String archivo, char identificador){
-        String[] matrices = archivo.split("\n");
-        for (int i = 0; i < matrices.length; i++) {
-            System.out.println(matrices[i]);
-        }
+        char a[] = archivo.toCharArray();
 
         boolean encontrado = false;
-        int indice = 0;
-        for (int i = 0; i < matrices.length; i++) {
-            char a[] = matrices[i].toCharArray();
-            if (encontrado == true) {
+        int indice =0;
+        for (int i = 0;i<a.length; i++){
+            if(a[i] == identificador){
+
+                indice = i;
+                encontrado = true;
+            }
+        }
+        int columnas = 0;
+        int filas =0;
+        for (int i = indice; i<a.length; i++){
+            if (a[i] == '\n'){
+                filas++;
                 break;
             }
-            for (int j = 0; j < a.length; j++) {
-                if (a[j] == identificador) {
-                    encontrado = true;
-                    indice = i;
+
+            if(a[i] == ':'){
+
+                for (int j=i+1; j<a.length; j++){
+                    if (a[j] == ';'){
+                        break;
+                    }
+                    if(a[j] != ',' ) {
+                        columnas++;
+                    }
+
+                }
+
+            }
+            if (a[i] == ';'){
+                filas ++;
+            }
+        }
+        int [][] matriz = new int[filas][columnas];
+        int auxiliar =indice+1;
+
+        System.out.println("Matriz = " +  identificador);
+        System.out.println("Columnas= "+columnas);
+        System.out.println("Filas = "+ filas);
+        for (int i = 0; i<matriz.length;i++){
+            System.out.println("fila");
+            auxiliar++;
+
+            for (int j = 0; j<matriz[0].length; j++){
+                if (a[auxiliar] == ';'){
+                    System.out.println("break");
                     break;
                 }
-            }
-        }
-        System.out.println();
-
-
-
-        String tmp[] = matrices[indice].split(";");
-        tmp[0] = tmp[0].replace(identificador + ":", "");
-        int filas = tmp.length;
-        System.out.println(filas);
-
-        int columnas = tmp[0].split(",").length;
-        System.out.println(columnas);
-        int matriz[][] = new int[filas][columnas];
-        for (int i = 0;i< tmp.length; i++){
-            String celdas []= tmp[i].split(",");
-            for (int j =0; j<celdas.length; j++){
-                matriz[i][j] = Integer.parseInt(celdas[j]) ;
+                if (Character.isDigit(a[auxiliar])){
+                    matriz[i][j] = Character.getNumericValue(a[auxiliar]);
+                }else{
+                    j--;
+                }
+                auxiliar++;
             }
 
         }
-
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j =0; j<matriz[0].length; j++){
+        for (int i = 0; i<matriz.length;i++){
+            for (int j = 0; j<matriz[0].length; j++){
                 System.out.print(matriz[i][j]+ ",");
             }
             System.out.println();
         }
+
     return matriz;
 
     }
