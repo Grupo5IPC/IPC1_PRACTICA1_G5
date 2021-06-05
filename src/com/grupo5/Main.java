@@ -220,6 +220,8 @@ public class Main {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
+//        String leter = String.valueOf(Letra);
+//        leter.toUpperCase();              //AQUI INTENTE PASAR LAS LETRAS MINUSCULAS A MAYUSCULAS PARA QUE NO AFECTARA EN EL PROCESO
         int[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
