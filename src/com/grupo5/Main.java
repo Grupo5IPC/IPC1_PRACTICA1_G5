@@ -158,7 +158,7 @@ public class Main {
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] leer_matriz(String archivo, char identificador) {
+    public static double[][] leer_matriz(String archivo, char identificador) {
 
         String[] matrices = archivo.split("\n");
         for (int i = 0; i < matrices.length; i++) {
@@ -198,11 +198,11 @@ public class Main {
 
         int columnas = tmp[0].split(",").length;
         System.out.println(columnas);
-        int matriz[][] = new int[filas][columnas];
+        double matriz[][] = new double[filas][columnas];
         for (int i = 0; i < tmp.length; i++) {
             String celdas[] = tmp[i].split(",");
             for (int j = 0; j < celdas.length; j++) {
-                matriz[i][j] = Integer.parseInt(celdas[j]);
+                matriz[i][j] = Double.valueOf(celdas[j]);
             }
 
         }
@@ -219,21 +219,21 @@ public class Main {
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] suma_matriz() {
+    public static void suma_matriz() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
 //        String leter = String.valueOf(Letra);
 //        leter.toUpperCase();              //AQUI INTENTE PASAR LAS LETRAS MINUSCULAS A MAYUSCULAS PARA QUE NO AFECTARA EN EL PROCESO
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
         System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
         char Letra2 = Escribir.next().charAt(0);
-        int[][] matriz2 = leer_matriz(s, Letra2);
+        double[][] matriz2 = leer_matriz(s, Letra2);
 
         //SUMA
-        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
         for (int i = 0; i < matriz1.length; i++) {
             for (int j = 0; j < matriz1[i].length; j++) {
                 matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
@@ -256,25 +256,24 @@ public class Main {
         System.out.println();
         rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
 
-        return matrizR;
 
     }
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] resta_matriz() {
+    public static void resta_matriz() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
         System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
         char Letra2 = Escribir.next().charAt(0);
-        int[][] matriz2 = leer_matriz(s, Letra2);
+        double[][] matriz2 = leer_matriz(s, Letra2);
 
         //RESTA
-        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
         for (int i = 0; i < matriz1.length; i++) {
             for (int j = 0; j < matriz1[i].length; j++) {
                 matrizR[i][j] = matriz1[i][j] - matriz2[i][j];
@@ -296,24 +295,23 @@ public class Main {
         }
         rep.add_resta(matriz1, matriz2, matrizR, Letra, Letra2);
 
-        return matrizR;
     }
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] MultiplicaciondeMatrices() {
+    public static void MultiplicaciondeMatrices() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
         System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
         char Letra2 = Escribir.next().charAt(0);
-        int[][] matriz2 = leer_matriz(s, Letra2);
+        double[][] matriz2 = leer_matriz(s, Letra2);
 
         //MATRIZ RESULTADO
-        int[][] matrizR = new int[matriz1.length][matriz2[0].length];
+        double[][] matrizR = new double[matriz1.length][matriz2[0].length];
 
         //MULTIPLICACIÓN
         if (matriz1[0].length == matriz2.length) {
@@ -339,23 +337,23 @@ public class Main {
             System.out.println("");
         }
         rep.add_multi_matriz(matriz1, matriz2, matrizR, Letra, Letra2);
-        return matrizR;
+
     }
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] MultiplicacionMatrizNumero() {
+    public static void MultiplicacionMatrizNumero() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
         System.out.println("Ingrese un número para operar con la matriz seleccionada: ");
         int Numero = Escribir.nextInt();
 
         //MULTIPLICACIÓN
-        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
         for (int i = 0; i < matriz1.length; i++) {
             for (int j = 0; j < matriz1[i].length; j++) {
                 matrizR[i][j] = matriz1[i][j] * Numero;
@@ -374,19 +372,19 @@ public class Main {
             System.out.println("");
         }
         rep.add_multi_numero(matriz1, matrizR, Letra, Numero);
-        return matrizR;
+
     }
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] Transpuesta() {
+    public static void Transpuesta() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //TRANSPUESTA
-        int matrizR[][] = new int[matriz1.length][matriz1[0].length];
+        double matrizR[][] = new double[matriz1.length][matriz1[0].length];
         for (int i = 0; i < matrizR.length; i++) {
             for (int j = 0; j < matrizR.length; j++) {
                 matrizR[i][j] = matriz1[j][i];
@@ -405,7 +403,7 @@ public class Main {
             System.out.println("");
         }
         rep.add_transpuesta(matriz1, matrizR, Letra);
-        return matrizR;
+
     }
 
 //-------------------------------------------------------------------------------------------------------------
@@ -436,16 +434,16 @@ public class Main {
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] InversadeMatrices() {
+    public static void InversadeMatrices() {
         //MATRIZ
         System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         if ((matriz1.length == 3 && matriz1[0].length == 3) || (matriz1.length == 2 && matriz1[0].length == 2)) {
             //--------------------------DETERMINANTE--------------------------
             //DIAGONALES POSITIVAS
-            int[][] matrizT = new int[matriz1.length][matriz1[0].length];
+            double[][] matrizT = new double[matriz1.length][matriz1[0].length];
             int Diagonal = 1;
             int Diagonal2 = 1;
             int Diagonal3 = 1;
@@ -496,7 +494,7 @@ public class Main {
                 //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
                 //MATRICES 3X3
                 if (matrizT.length == 3 && matrizT[0].length == 3) {
-                    int[][] matrizAdj = new int[matrizT.length][matrizT[0].length];
+                    double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
                     for (int i = 0; i < matrizT.length; i++) {
                         for (int j = 0; j < matrizT[i].length; j++) {
                             if (i == 0 && j == 0) {
@@ -548,7 +546,7 @@ public class Main {
 
                 //MATRICES 2X2
                 if (matriz1.length == 2 && matriz1[0].length == 2) {
-                    int[][] matrizAdj = new int[matriz1.length][matriz1[0].length];
+                    double[][] matrizAdj = new double[matriz1.length][matriz1[0].length];
                     for (int i = 0; i < matriz1.length; i++) {
                         for (int j = 0; j < matriz1[i].length; j++) {
                             if (i == 0 && j == 0) {
@@ -586,15 +584,15 @@ public class Main {
         } else {
             System.out.println("\nLa matriz seleccionada no es cuadrada o es mayor a 3x3");
         }
-        return null;
+
     }
         //-------------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------
-    public static int[][] Determinante() {
+    public static void Determinante() {
         //MATRIZ
         System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //--------------------------DETERMINANTE--------------------------
         //DIAGONALES POSITIVAS
@@ -640,26 +638,26 @@ public class Main {
         } else {
             System.out.println("\nLa matriz seleccionada no es cuadrada o es mayor a 3x3");
         }
-        return null;
+
     }
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-    public static int[][] DivisiondeMatrices() {
+    public static void DivisiondeMatrices() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
 
         //MATRIZ 2
         System.out.println("Ingrese la letra de la segunda matriz(A-Z): ");
         char Letra2 = Escribir.next().charAt(0);
-        int[][] matriz2 = leer_matriz(s, Letra2);
+        double[][] matriz2 = leer_matriz(s, Letra2);
 
         //------------------------INVERSA MATRIZ A-----------------------------
         //--------------------------DETERMINANTE--------------------------
         //DIAGONALES POSITIVAS
-        int[][] matrizT = new int[matriz1.length][matriz1[0].length];
+        double[][] matrizT = new double[matriz1.length][matriz1[0].length];
         int Diagonal = 1;
         int Diagonal2 = 1;
         int Diagonal3 = 1;
@@ -708,7 +706,7 @@ public class Main {
             }
 
             //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
-            int[][] matrizAdj = new int[matrizT.length][matrizT[0].length];
+            double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
             for (int i = 0; i < matrizT.length; i++) {
                 for (int j = 0; j < matrizT[i].length; j++) {
                     if (i == 0 && j == 0) {
@@ -775,7 +773,7 @@ public class Main {
             }
             System.out.println("");
         }
-        return null;
+
     }
              //-------------------------------------------------------------------------------------------------------------
             //-------------------------------------------------------------------------------------------------------------
@@ -783,15 +781,15 @@ public class Main {
 
         System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
         char Letra = Escribir.next().charAt(0);
-        int[][] matriz1 = leer_matriz(s, Letra);
-        int[][] aux_matriz = leer_matriz(s, Letra);
+        double[][] matriz1 = leer_matriz(s, Letra);
+        double[][] aux_matriz = leer_matriz(s, Letra);
         System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
         int Exponente = Escribir.nextInt();
 
         //--------------------------POTENCIA--------------------------//
-        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
         int contador = 0;
-        int operacion = 0;
+        double operacion = 0.0;
         if (matriz1[0].length == matriz1.length) {
             if (Exponente == 1) {
                 for (int i = 0; i < matriz1.length; i++) {

@@ -259,7 +259,7 @@ public class Reportes {
         }
     }
 
-    public void add_suma(int[][] matriz1, int[][] matriz2, int[][] matrizR, char identificador1, char identificador2) {
+    public void add_suma(double[][] matriz1, double[][] matriz2, double[][] matrizR, char identificador1, char identificador2) {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
@@ -328,7 +328,7 @@ public class Reportes {
 
 
 }
-    public void add_resta(int[][] matriz1, int[][] matriz2, int[][] matrizR, char identificador1, char identificador2) {
+    public void add_resta(double[][] matriz1, double[][] matriz2, double[][] matrizR, char identificador1, char identificador2) {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
@@ -397,7 +397,7 @@ public class Reportes {
 
 
     }
-    public void add_multi_matriz(int[][] matriz1, int[][] matriz2, int[][] matrizR, char identificador1, char identificador2) {
+    public void add_multi_matriz(double[][] matriz1, double[][] matriz2, double[][] matrizR, char identificador1, char identificador2) {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
@@ -466,7 +466,7 @@ public class Reportes {
 
 
     }
-    public void add_multi_numero(int[][] matriz1,  int[][] matrizR, char identificador1, int numero) {
+    public void add_multi_numero(double[][] matriz1,  double[][] matrizR, char identificador1, int numero) {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
@@ -519,7 +519,7 @@ public class Reportes {
 
 
     }
-    public void add_transpuesta(int[][] matriz, int[][] transpuesta, char identificador1) {
+    public void add_transpuesta(double[][] matriz, double[][] transpuesta, char identificador1) {
 
             try {
                 FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
