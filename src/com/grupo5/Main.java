@@ -91,6 +91,7 @@ public class Main {
 //-------------------------------------------------------------------------------------------------------------
                 case "7":
                     System.out.println("------POTENCIA DE LA MATRIZ------");
+                    PotenciaMatriz();
                     break;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -776,5 +777,80 @@ public class Main {
         }
         return null;
     }
+             //-------------------------------------------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------
+     public static void PotenciaMatriz() {
+
+        System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
+        char Letra = Escribir.next().charAt(0);
+        int[][] matriz1 = leer_matriz(s, Letra);
+        int[][] aux_matriz = leer_matriz(s, Letra);
+        System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
+        int Exponente = Escribir.nextInt();
+
+        //--------------------------POTENCIA--------------------------//
+        int[][] matrizR = new int[matriz1.length][matriz1[0].length];
+        int contador = 0;
+        int operacion = 0;
+        if (matriz1[0].length == matriz1.length) {
+            if (Exponente == 1) {
+                for (int i = 0; i < matriz1.length; i++) {
+                    for (int j = 0; j < matriz1[i].length; j++) {
+                        matrizR[i][j] = matriz1[i][j] * 1;
+                    }
+                }
+                System.out.println("");
+                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                for (int i = 0; i < matrizR.length; i++) {
+                    for (int j = 0; j < matrizR[i].length; j++) {
+                        System.out.print(matrizR[i][j] + "\t");
+                    }
+                    {
+                        System.out.println("");
+                    }
+                }
+            }
+            if (Exponente > 1) {
+
+                for (int m = 1; m < Exponente; m++) {
+
+                    for (int i = 0; i < matriz1.length; i++) {
+
+                        for (int k = 0; k < matriz1[i].length; k++) {
+
+                            operacion = 0;
+                            contador = 0;
+
+                            for (int j = 0; j < matriz1[i].length; j++) {
+                                contador++;
+                                operacion = matriz1[i][j] * aux_matriz[j][k] + operacion;
+
+                                if (contador == matriz1[i].length) {
+                                    matrizR[i][k] = operacion;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < matriz1.length; i++) {
+                        for (int j = 0; j < matriz1[i].length; j++) {
+                            aux_matriz[i][j] = matrizR[i][j];
+                        }
+                    }
+                }
+
+                System.out.println("");
+                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                for (int i = 0; i < matriz1.length; i++) {
+                    for (int j = 0; j < matriz1[i].length; j++) {
+                        System.out.print("  " + matrizR[i][j] + "\t");
+                    }
+                    System.out.println("");
+                }
+
+            }
+        } else {
+            System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
+        }
+    }           
 }
 
