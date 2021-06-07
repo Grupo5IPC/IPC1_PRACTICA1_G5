@@ -1760,7 +1760,7 @@ public class Main {
             Thread.sleep(200);
             System.out.println(" | |__| | | |    | |_| | | |_) | | (_) |    ___) |");
             Thread.sleep(200);
-            System.out.println(" \\_____| |_|     \\__,_| | .__/   \\___/    |____/ ");
+            System.out.println("  \\_____| |_|     \\__,_| | .__/   \\___/    |____/ ");
             Thread.sleep(200);
             System.out.println("                         | |                      ");
             Thread.sleep(200);
