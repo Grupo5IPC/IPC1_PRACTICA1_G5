@@ -574,5 +574,61 @@ public class Reportes {
             }
 
     }
+    public void add_inversa(double[][] matriz, double[][] inversa, char identificador1) {
+
+        try {
+            FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
+            String auxiliar1 = "" +
+                    "    <div class=\"row\">\n" +
+                    "      <div class=\"col-sm-12  \">\n" +
+                    "\n" +
+                    "        <h1> Inversa de matrices</h1>\n" +
+
+                    "  \n" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "\n" +
+
+                    "    <div class=\"row\">\n " +
+
+                    "    <div class=\"col-sm-6  text-center \" style=\"overflow-x:auto;\">\n <h3>Matriz "+identificador1+"</h3>" +
+                    "    <table > ";
+            for (int i = 0; i < matriz.length; i++) {
+                auxiliar1 += "\n<tr>";
+                for (int j = 0; j < matriz[0].length; j++) {
+                    auxiliar1 += "\n<td>";
+                    auxiliar1 += matriz[i][j];
+                    auxiliar1 += "\n</td>";
+                }
+                auxiliar1 += "\n</tr>";
+
+            }
+            auxiliar1 += "\n</table>\n</div>";
+            fn.write(auxiliar1);
+
+
+            String auxiliar2 = "<div class=\"col-sm-6  text-center \" style=\"overflow-x:auto;\">\n <h3>Inversa de "+identificador1+"</h3>" +
+                    " <table >\n" +
+
+                    "<tr>\n";
+            for (int i = 0; i < inversa.length; i++) {
+                auxiliar2 += "\n<tr>";
+                for (int j = 0; j < inversa[0].length; j++) {
+                    auxiliar2 += "\n<td>";
+                    auxiliar2 += inversa[i][j];
+                    auxiliar2 += "\n</td>";
+                }
+                auxiliar2 += "\n</tr>";
+
+            }
+            auxiliar2 += "\n</table>\n</div>\n</div>";
+            fn.write(auxiliar2);
+            fn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }
 
