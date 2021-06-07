@@ -104,7 +104,9 @@ public class Main {
                     System.out.println("------DETERMINANTE DE LA MATRIZ------");
                     Determinante();
                     break;
-
+                case "9":
+                    controlR();
+                    break;
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
                 case "0":
@@ -244,7 +246,7 @@ public class Main {
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
 
-        if (Letra == 'R' && Letra2 == 'R') {
+        if (Letra == 'R' || Letra2 == 'R') {
             if (Letra == 'R') {
 
                 double[][] matriz2 = leer_matriz(s, Letra2);
@@ -321,6 +323,7 @@ public class Main {
 
             System.out.println();
             rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
+            set_matrizR(matrizR);
         }
 
     }
@@ -340,7 +343,7 @@ public class Main {
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
 
-        if (Letra == 'R' && Letra2 == 'R') {
+        if (Letra == 'R' || Letra2 == 'R') {
             if (Letra == 'R') {
 
                 double[][] matriz2 = leer_matriz(s, Letra2);
@@ -438,7 +441,7 @@ public class Main {
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
 
-        if (Letra == 'R' && Letra2 == 'R') {
+        if (Letra == 'R' || Letra2 == 'R') {
             if (Letra == 'R') {
 
                 double[][] matriz2 = leer_matriz(s, Letra2);
@@ -1102,7 +1105,10 @@ public class Main {
             }
 
         }
+        System.out.println(Matriz_R[0][0]);
     }
-
+    public static void controlR(){
+        imprimir_matriz(Matriz_R);
+    }
 }
 
