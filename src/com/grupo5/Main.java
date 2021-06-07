@@ -175,7 +175,7 @@ public class Main {
 
         boolean encontrado = false;
         int indice = 0;
-        for (int i = 0; i < matrices.length; i++) {
+        for (int i = 0; i < matrices.length && i<26; i++) {
             char a[] = matrices[i].toCharArray();
             if (encontrado == true) {
                 break;
@@ -189,13 +189,7 @@ public class Main {
                 }
 
             }
-            for (int j = 0; j < a.length; j++) {
-                if (a[j] == identificador && Character.isAlphabetic(identificador)) {
-                    encontrado = true;
-                    indice = i;
-                    break;
-                }
-            }
+
         }
 
         if (encontrado == true) {
@@ -1588,7 +1582,7 @@ public class Main {
 
     //-------------------------------------------------------------------------------------------------------------
 
-
+    // FUNCIONES AUXILIARES
     public static void imprimir_matriz(double[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
@@ -1596,6 +1590,12 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    public static int comprobar_duplicidad(String [] matriz){
+        int fila =-1;
+
+        return fila;
     }
     //-------------------------------------------------------------------------------------------------------------
 
@@ -1619,7 +1619,7 @@ public class Main {
             }
 
         }
-        System.out.println(Matriz_R[0][0]);
+       // System.out.println(Matriz_R[0][0]);
     }
     //-------------------------------------------------------------------------------------------------------------
 
@@ -1642,6 +1642,7 @@ public class Main {
         }
         return null;
     }
+
     //-------------------------------------------------------------------------------------------------------------
 }
 
