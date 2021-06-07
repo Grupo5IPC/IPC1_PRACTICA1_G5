@@ -12,7 +12,8 @@ public class Main {
     public static Reportes rep = new Reportes();
     public static String op = "";
     public static double Matriz_R[][];
-    public static String [] matrices;
+    public static String[] matrices;
+    public static Scanner opcion = new Scanner(System.in);
 
     public static void main(String[] args) {
         String prueba = "";
@@ -59,7 +60,7 @@ public class Main {
 //-------------------------------------------------------------------------------------------------------------
                 case "3":
                     System.out.println("------MULTIPLICACION DE MATRICES------");
-                    System.out.println("SELECCIONE UNA DE LAS SIGUIENTES OPCIONES \n1-> MULTIPLICAION DE MATRICES \n2-> MULTIPLICACION DE MATRIZ CON UN NUMERO");
+                    System.out.println("SELECCIONE UNA DE LAS SIGUIENTES OPCIONES \n1-> MULTIPLICACION DE MATRICES \n2-> MULTIPLICACION DE MATRIZ CON UN NUMERO");
                     Scanner scanner = new Scanner(System.in);
                     String option = scanner.nextLine();
                     switch (option) {
@@ -114,9 +115,8 @@ public class Main {
 //-------------------------------------------------------------------------------------------------------------
                 case "0":
                     System.out.println("------FIN DEL PROGRAMA------");
-                    op ="0";
+                    op = "0;
                     break;
-
 
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
@@ -124,7 +124,6 @@ public class Main {
                     System.out.println("SELECCIONE UNA DE LAS OPCIONES");
                     break;
             }
-
         } while (op != "0");
 
     }
@@ -180,7 +179,7 @@ public class Main {
 
         boolean encontrado = false;
         int indice = 0;
-        for (int i = 0; i < matrices.length && i<26; i++) {
+        for (int i = 0; i < matrices.length && i < 26; i++) {
             char a[] = matrices[i].toCharArray();
             if (encontrado == true) {
                 break;
@@ -225,7 +224,6 @@ public class Main {
             return null;
         }
 
-
     }
 
     //-------------------------------------------------------------------------------------------------------------
@@ -243,10 +241,10 @@ public class Main {
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
         //System.out.println(Letra);
-       // System.out.println(letra2);
+        // System.out.println(letra2);
 
         if (Letra == 'R' || Letra2 == 'R') {
-           // System.out.println(1);
+            // System.out.println(1);
             if (Letra == 'R') {
                 //System.out.println(1);
                 double[][] matriz2 = leer_matriz(s, Letra2);
@@ -262,10 +260,10 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("Matriz "+Letra+" :");
+                        System.out.println("Matriz " + Letra + " :");
                         imprimir_matriz(Matriz_R);
                         System.out.println();
-                        System.out.println("Matriz "+Letra2+" :");
+                        System.out.println("Matriz " + Letra2 + " :");
                         imprimir_matriz(matriz2);
                         System.out.println();
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -278,7 +276,7 @@ public class Main {
                 } else {
 
                 }
-            } else if(Letra2 == 'R') {
+            } else if (Letra2 == 'R') {
                 //System.out.println(2);
                 double[][] matriz2 = leer_matriz(s, Letra);
                 if (matriz2 != null && Matriz_R != null) {
@@ -294,9 +292,9 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("Matriz "+Letra+" :");
+                        System.out.println("Matriz " + Letra + " :");
                         imprimir_matriz(matriz2);
-                        System.out.println("Matriz "+Letra2+" :");
+                        System.out.println("Matriz " + Letra2 + " :");
                         imprimir_matriz(Matriz_R);
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
@@ -327,10 +325,10 @@ public class Main {
 
                     //IMPRIMIR MATRIZ SUMA
                     System.out.println("");
-                    System.out.println("Matriz "+Letra+" :");
+                    System.out.println("Matriz " + Letra + " :");
                     imprimir_matriz(matriz1);
                     System.out.println();
-                    System.out.println("Matriz "+Letra2+" :");
+                    System.out.println("Matriz " + Letra2 + " :");
                     imprimir_matriz(matriz2);
                     System.out.println();
                     System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -340,10 +338,10 @@ public class Main {
                     System.out.println();
                     rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
                     set_matrizR(matrizR);
-                }else{
+                } else {
                     System.out.println("Error: Las matrices no coinciden en tamaño");
                 }
-            }else{
+            } else {
                 System.out.println("Error: La matriz solicitada no fue encontrada");
             }
         }
@@ -380,10 +378,10 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("Matriz "+Letra+" :");
+                        System.out.println("Matriz " + Letra + " :");
                         imprimir_matriz(Matriz_R);
                         System.out.println();
-                        System.out.println("Matriz "+Letra2+" :");
+                        System.out.println("Matriz " + Letra2 + " :");
                         imprimir_matriz(matriz2);
                         System.out.println();
                         System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -408,10 +406,10 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("Matriz "+Letra+" :");
+                        System.out.println("Matriz " + Letra + " :");
                         imprimir_matriz(matriz2);
                         System.out.println();
-                        System.out.println("Matriz "+Letra2+" :");
+                        System.out.println("Matriz " + Letra2 + " :");
                         imprimir_matriz(Matriz_R);
                         System.out.println();
                         System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -421,16 +419,15 @@ public class Main {
                         rep.add_resta(matriz2, Matriz_R, matrizR, Letra, Letra2);
                         set_matrizR(matrizR);
                         System.out.println();
-                    }else{
+                    } else {
                         System.out.println("Error: El numero de filas y columnas debe coincidir entre las matrices");
                     }
-                }else{
+                } else {
                     System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             }
 
         } else {
-
 
             double[][] matriz2 = leer_matriz(s, Letra2);
             double[][] matriz1 = leer_matriz(s, Letra);
@@ -448,13 +445,12 @@ public class Main {
                 System.out.println("");
                 System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                 System.out.println("");
-               imprimir_matriz(matrizR);
+                imprimir_matriz(matrizR);
                 System.out.println();
                 rep.add_resta(matriz1, matriz2, matrizR, Letra, Letra2);
                 set_matrizR(matrizR);
             }
         }
-
 
     }
 
@@ -480,36 +476,35 @@ public class Main {
                 if (Matriz_R != null && matriz2 != null) {
                     double matrizR[][] = new double[Matriz_R[0].length][matriz2.length];
 
-                        if (Matriz_R[0].length == matriz2.length) {
+                    if (Matriz_R[0].length == matriz2.length) {
 
-                            for (int i = 0; i < Matriz_R.length; i++) {
-                                for (int j = 0; j < matriz2[0].length; j++) {
-                                    for (int k = 0; k < Matriz_R[0].length; k++) {
-                                        matrizR[i][j] += Matriz_R[i][k] * matriz2[k][j];
-                                    }
+                        for (int i = 0; i < Matriz_R.length; i++) {
+                            for (int j = 0; j < matriz2[0].length; j++) {
+                                for (int k = 0; k < Matriz_R[0].length; k++) {
+                                    matrizR[i][j] += Matriz_R[i][k] * matriz2[k][j];
                                 }
                             }
-                            //IMPRIMIR MATRIZ
-                            System.out.println("");
-                            System.out.println("Matriz "+Letra+" :");
-                            imprimir_matriz(Matriz_R);
-                            System.out.println();
-                            System.out.println("Matriz "+Letra2+" :");
-                            imprimir_matriz(matriz2);
-                            System.out.println();
-                            System.out.println("La Multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
-                            System.out.println("");
-                            imprimir_matriz(matrizR);
-
-                            rep.add_multi_matriz(Matriz_R, matriz2, matrizR, Letra, Letra2);
-                            set_matrizR(matrizR);
-                            System.out.println();
-                        } else {
-                            System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                         }
+                        //IMPRIMIR MATRIZ
+                        System.out.println("");
+                        System.out.println("Matriz " + Letra + " :");
+                        imprimir_matriz(Matriz_R);
+                        System.out.println();
+                        System.out.println("Matriz " + Letra2 + " :");
+                        imprimir_matriz(matriz2);
+                        System.out.println();
+                        System.out.println("La Multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
+                        System.out.println("");
+                        imprimir_matriz(matrizR);
 
+                        rep.add_multi_matriz(Matriz_R, matriz2, matrizR, Letra, Letra2);
+                        set_matrizR(matrizR);
+                        System.out.println();
+                    } else {
+                        System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
+                    }
 
-                }else{
+                } else {
                     System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             } else {
@@ -526,10 +521,10 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("Matriz "+Letra+" :");
+                        System.out.println("Matriz " + Letra + " :");
                         imprimir_matriz(matriz2);
                         System.out.println();
-                        System.out.println("Matriz "+Letra2+" :");
+                        System.out.println("Matriz " + Letra2 + " :");
                         imprimir_matriz(Matriz_R);
                         System.out.println();
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -543,16 +538,14 @@ public class Main {
                         System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                     }
 
-                }else{
+                } else {
                     System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             }
 
         } else {
 
-
             double[][] matriz1 = leer_matriz(s, Letra);
-
 
             double[][] matriz2 = leer_matriz(s, Letra2);
             if (matriz1 != null && matriz2 != null) {
@@ -570,10 +563,10 @@ public class Main {
                     }
                     //IMPRIMIR MATRIZ MULTIPLICACIÓN
                     System.out.println("");
-                    System.out.println("Matriz "+Letra+" :");
+                    System.out.println("Matriz " + Letra + " :");
                     imprimir_matriz(matriz1);
                     System.out.println();
-                    System.out.println("Matriz "+Letra2+" :");
+                    System.out.println("Matriz " + Letra2 + " :");
                     imprimir_matriz(matriz2);
                     System.out.println();
                     System.out.println("La multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
@@ -584,7 +577,7 @@ public class Main {
                 } else {
                     System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                 }
-            }else{
+            } else {
                 System.out.println("Error: No se ha podido encontrar alguna de las matrices");
             }
 
@@ -615,7 +608,7 @@ public class Main {
 
                 //IMPRIMIR MATRIZ MULTIPLICADA CON EL NUMERO
                 System.out.println("");
-                System.out.println("Matriz "+Letra+" :");
+                System.out.println("Matriz " + Letra + " :");
                 imprimir_matriz(Matriz_R);
                 System.out.println();
 
@@ -651,7 +644,7 @@ public class Main {
 
     //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-      public static void Transpuesta() {
+    public static void Transpuesta() {
         //MATRIZ 1
         System.out.println("Ingrese la letra de la matriz a operar(A-Z): ");
         char letra = Escribir.next().charAt(0);
@@ -976,7 +969,7 @@ public class Main {
                             System.out.println("");
                             for (int i = 0; i < matrizInv.length; i++) {
                                 for (int j = 0; j < matrizInv[i].length; j++) {
-                                    System.out.print(matrizInv[i][j] + "\t");
+                                    System.out.print("[" + matrizInv[i][j] + "]" + "\t");
                                 }
                                 System.out.println("");
                             }
@@ -1143,7 +1136,7 @@ public class Main {
         char letra2 = Escribir.next().charAt(0);
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
-        if (Letra == 'R' && Letra2 == 'R') {
+        if (Letra == 'R' || Letra2 == 'R') {
             if (Letra == 'R') {
                 double[][] matriz2 = leer_matriz(s, Letra2);
                 if (Matriz_R != null && matriz2 != null) {
@@ -1512,136 +1505,173 @@ public class Main {
     //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
     public static void PotenciaMatriz() {
+        Scanner potencia = new Scanner(System.in);
+        try {
+            System.out.println("Ingrese la letra de la matriz(A-Z): ");
+            char letra = potencia.next().charAt(0);
 
-        System.out.println("Ingrese la letra de la matriz(A-Z): ");
-        char letra = Escribir.next().charAt(0);
+            System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
+            int Exponente = potencia.nextInt();
+            char Letra = Character.toUpperCase(letra);
+            try {
+                //--------------------------POTENCIA--------------------------//
+                if (Letra == 'R') {
+                    double[][] aux_matriz = copy_matrizR(Matriz_R);
+                    double[][] matrizR = new double[Matriz_R.length][Matriz_R[0].length];
 
-        System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
-        int Exponente = Escribir.nextInt();
-        char Letra = Character.toUpperCase(letra);
-
-        //--------------------------POTENCIA--------------------------//
-        if (Letra == 'R') {
-            double[][] aux_matriz = copy_matrizR(Matriz_R);
-            double[][] matrizR = new double[Matriz_R.length][Matriz_R[0].length];
-
-            int contador = 0;
-            double operacion = 0.0;
-            if (Matriz_R != null) {
-                if (Matriz_R[0].length == Matriz_R.length) {
-                    if (Exponente == 1) {
-                        for (int i = 0; i < Matriz_R.length; i++) {
-                            for (int j = 0; j < Matriz_R[i].length; j++) {
-                                matrizR[i][j] = Matriz_R[i][j] * 1;
-                            }
-                        }
-                        System.out.println("");
-                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                        imprimir_matriz(matrizR);
-                        set_matrizR(matrizR);
-                    }
-                    if (Exponente > 1) {
-
-                        for (int m = 1; m < Exponente; m++) {
-
-                            for (int i = 0; i < Matriz_R.length; i++) {
-
-                                for (int k = 0; k < Matriz_R[i].length; k++) {
-
-                                    operacion = 0;
-                                    contador = 0;
-
+                    int contador = 0;
+                    double operacion = 0.0;
+                    if (Matriz_R != null) {
+                        if (Matriz_R.length == Matriz_R[0].length) {
+                            
+                            if (Exponente == 0) {
+                                for (int i = 0; i < Matriz_R.length; i++) {
                                     for (int j = 0; j < Matriz_R[i].length; j++) {
-                                        contador++;
-                                        operacion = Matriz_R[i][j] * aux_matriz[j][k] + operacion;
-
-                                        if (contador == Matriz_R[i].length) {
-                                            matrizR[i][k] = operacion;
+                                        if (i == j) {
+                                            matrizR[i][j] = 1;
                                         }
                                     }
                                 }
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
                             }
-                            for (int i = 0; i < Matriz_R.length; i++) {
-                                for (int j = 0; j < Matriz_R[i].length; j++) {
-                                    aux_matriz[i][j] = matrizR[i][j];
+
+                            if (Exponente == 1) {
+                                for (int i = 0; i < Matriz_R.length; i++) {
+                                    for (int j = 0; j < Matriz_R[i].length; j++) {
+                                        matrizR[i][j] = Matriz_R[i][j] * 1;
+                                    }
                                 }
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
                             }
+                            if (Exponente > 1) {
+
+                                for (int m = 1; m < Exponente; m++) {
+
+                                    for (int i = 0; i < Matriz_R.length; i++) {
+
+                                        for (int k = 0; k < Matriz_R[i].length; k++) {
+
+                                            operacion = 0;
+                                            contador = 0;
+
+                                            for (int j = 0; j < Matriz_R[i].length; j++) {
+                                                contador++;
+                                                operacion = Matriz_R[i][j] * aux_matriz[j][k] + operacion;
+
+                                                if (contador == Matriz_R[i].length) {
+                                                    matrizR[i][k] = operacion;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < Matriz_R.length; i++) {
+                                        for (int j = 0; j < Matriz_R[i].length; j++) {
+                                            aux_matriz[i][j] = matrizR[i][j];
+                                        }
+                                    }
+                                }
+
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
+
+                            }
+                        } else {
+                            System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
                         }
-
-                        System.out.println("");
-                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                        imprimir_matriz(matrizR);
-                        set_matrizR(matrizR);
-
                     }
                 } else {
-                    System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
-                }
-            }
-        } else {
-            double[][] matriz1 = leer_matriz(s, Letra);
-            if (matriz1 != null) {
-                double[][] aux_matriz = leer_matriz(s, Letra);
-                double[][] matrizR = new double[matriz1.length][matriz1[0].length];
-                int contador = 0;
-                double operacion = 0.0;
-                if (matriz1[0].length == matriz1.length) {
-                    if (Exponente == 1) {
-                        for (int i = 0; i < matriz1.length; i++) {
-                            for (int j = 0; j < matriz1[i].length; j++) {
-                                matrizR[i][j] = matriz1[i][j] * 1;
-                            }
-                        }
-                        System.out.println("");
-                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                        imprimir_matriz(matrizR);
-                        set_matrizR(matrizR);
-                    }
-                    if (Exponente > 1) {
-
-                        for (int m = 1; m < Exponente; m++) {
-
-                            for (int i = 0; i < matriz1.length; i++) {
-
-                                for (int k = 0; k < matriz1[i].length; k++) {
-
-                                    operacion = 0;
-                                    contador = 0;
-
+                    double[][] matriz1 = leer_matriz(s, Letra);
+                    if (matriz1 != null) {
+                        double[][] aux_matriz = leer_matriz(s, Letra);
+                        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
+                        int contador = 0;
+                        double operacion = 0.0;
+                        if (matriz1[0].length == matriz1.length) {
+                            
+                            if (Exponente == 0) {
+                                for (int i = 0; i < matriz1.length; i++) {
                                     for (int j = 0; j < matriz1[i].length; j++) {
-                                        contador++;
-                                        operacion = matriz1[i][j] * aux_matriz[j][k] + operacion;
-
-                                        if (contador == matriz1[i].length) {
-                                            matrizR[i][k] = operacion;
+                                        if (i == j) {
+                                            matrizR[i][j] = 1.0;
                                         }
                                     }
                                 }
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
                             }
-                            for (int i = 0; i < matriz1.length; i++) {
-                                for (int j = 0; j < matriz1[i].length; j++) {
-                                    aux_matriz[i][j] = matrizR[i][j];
+                            
+                            if (Exponente == 1) {
+                                for (int i = 0; i < matriz1.length; i++) {
+                                    for (int j = 0; j < matriz1[i].length; j++) {
+                                        matrizR[i][j] = matriz1[i][j] * 1;
+                                    }
                                 }
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
                             }
+                            if (Exponente > 1) {
+
+                                for (int m = 1; m < Exponente; m++) {
+
+                                    for (int i = 0; i < matriz1.length; i++) {
+
+                                        for (int k = 0; k < matriz1[i].length; k++) {
+
+                                            operacion = 0;
+                                            contador = 0;
+
+                                            for (int j = 0; j < matriz1[i].length; j++) {
+                                                contador++;
+                                                operacion = matriz1[i][j] * aux_matriz[j][k] + operacion;
+
+                                                if (contador == matriz1[i].length) {
+                                                    matrizR[i][k] = operacion;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < matriz1.length; i++) {
+                                        for (int j = 0; j < matriz1[i].length; j++) {
+                                            aux_matriz[i][j] = matrizR[i][j];
+                                        }
+                                    }
+                                }
+
+                                System.out.println("");
+                                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                                imprimir_matriz(matrizR);
+                                set_matrizR(matrizR);
+
+                            }
+                        } else {
+                            System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
                         }
-
-                        System.out.println("");
-                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                        imprimir_matriz(matrizR);
-                        set_matrizR(matrizR);
-
                     }
-                } else {
-                    System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
                 }
+            } catch (Exception e) {
+                System.out.println("Ha ingresado un dato incorrecto");
             }
+        } catch (Exception e) {
+            opcion = new Scanner(System.in);
+            System.out.println("Ha ingresado un dato incorrecto");
+// FALTA REPORTE
         }
     }
-// FALTA REPORTE
-
-    //-------------------------------------------------------------------------------------------------------------
-
+//-------------------------------------------------------------------------------------------------------------
     // FUNCIONES AUXILIARES
+
     public static void imprimir_matriz(double[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
@@ -1651,13 +1681,13 @@ public class Main {
         }
     }
 
-    public static int comprobar_duplicidad( char identificador){
-        int fila =0;
+    public static int comprobar_duplicidad(char identificador) {
+        int fila = 0;
         boolean encontrado = false;
 
         int auxiliar = -1;
 
-        for (int i = 0; i < matrices.length && i<26; i++) {
+        for (int i = 0; i < matrices.length && i < 26; i++) {
             char a[] = matrices[i].toCharArray();
 
             for (int j = 0; j < a.length; j++) {
@@ -1676,7 +1706,6 @@ public class Main {
     //-------------------------------------------------------------------------------------------------------------
 
     //OPERACIONES AUXILIARES DE LA MATRIZ R
-
     public static void get_matrizR() {
         try {
             Matriz_R = leer_matriz(s, 'R');
@@ -1695,7 +1724,7 @@ public class Main {
             }
 
         }
-       // System.out.println(Matriz_R[0][0]);
+        // System.out.println(Matriz_R[0][0]);
     }
     //-------------------------------------------------------------------------------------------------------------
 
@@ -1721,4 +1750,5 @@ public class Main {
 
     //-------------------------------------------------------------------------------------------------------------
 }
+
 
