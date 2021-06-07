@@ -105,6 +105,7 @@ public class Main {
                     Determinante();
                     break;
                 case "9":
+                    //CONTROLAR LA R
                     controlR();
                     break;
 //-------------------------------------------------------------------------------------------------------------
@@ -1089,216 +1090,504 @@ public class Main {
         char letra2 = Escribir.next().charAt(0);
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
-
-        double[][] matriz2 = leer_matriz(s, Letra2);
-        double[][] matriz1 = leer_matriz(s, Letra);
-
-        //------------------------INVERSA MATRIZ A-----------------------------
-        //--------------------------DETERMINANTE--------------------------
-        //DIAGONALES POSITIVAS
-        double[][] matrizT = new double[matriz1.length][matriz1[0].length];
-        int Diagonal = 1;
-        int Diagonal2 = 1;
-        int Diagonal3 = 1;
-        for (int i = 0; i < matriz1.length; i++) {
-            for (int j = 0; j < matriz1[i].length; j++) {
-                if (i == j) {
-                    Diagonal *= matriz1[i][j];
-                }
-                if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
-                    Diagonal2 *= matriz1[i][j];
-                }
-                if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
-                    Diagonal3 *= matriz1[i][j];
-                }
-            }
-        }
-
-        //DIAGONALES CONTRARIAS
-        int Diagonal4 = 1;
-        int Diagonal5 = 1;
-        int Diagonal6 = 1;
-        for (int i = 0; i < matriz1.length; i++) {
-            for (int j = 0; j < matriz1[i].length; j++) {
-                if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
-                    Diagonal4 *= matriz1[i][j];
-                }
-                if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
-                    Diagonal5 *= matriz1[i][j];
-                }
-                if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
-                    Diagonal6 *= matriz1[i][j];
-                }
-            }
-        }
-
-        double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
-        if (Det == 0) {
-            System.out.println("La matriz ingresada no tiene inversa porque su determinante es cero");
-        } else {
-
-            //--------------------------TRANSPUESTA--------------------------
-            for (int i = 0; i < matriz1.length; i++) {
-                for (int j = 0; j < matriz1[i].length; j++) {
-                    matrizT[i][j] = matriz1[j][i];
-                }
-            }
-
-            //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
-            double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
-            for (int i = 0; i < matrizT.length; i++) {
-                for (int j = 0; j < matrizT[i].length; j++) {
-                    if (i == 0 && j == 0) {
-                        matrizAdj[i][j] = ((matrizT[1][1] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][1]));
-                    }
-                    if (i == 0 && j == 1) {
-                        matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][0])) * (-1);
-                    }
-                    if (i == 0 && j == 2) {
-                        matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][1]) - (matrizT[1][1] * matrizT[2][0]));
-                    }
-                    if (i == 1 && j == 0) {
-                        matrizAdj[i][j] = ((matrizT[0][1] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][1])) * (-1);
-                    }
-                    if (i == 1 && j == 1) {
-                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][0]));
-                    }
-                    if (i == 1 && j == 2) {
-                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][1]) - (matrizT[0][1] * matrizT[2][0])) * (-1);
-                    }
-                    if (i == 2 && j == 0) {
-                        matrizAdj[i][j] = ((matrizT[0][1] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][1]));
-                    }
-                    if (i == 2 && j == 1) {
-                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][0])) * (-1);
-                    }
-                    if (i == 2 && j == 2) {
-                        matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][1]) - (matrizT[0][1] * matrizT[1][0]));
-                    }
-                }
-            }
-            //-------------------ADJUNTA DIVIDIDA POR DETERMINANTE = INVERSA-------------------
-            double[][] matrizInv = new double[matrizAdj.length][matrizAdj[0].length];
-            for (int i = 0; i < matrizAdj.length; i++) {
-                for (int j = 0; j < matrizAdj[i].length; j++) {
-                    matrizInv[i][j] = (double) (matrizAdj[i][j] / Det);
-                }
-            }
-
-            //-------------------MULTIPLICACIÓN A^-1 * B = DIVISIÓN-------------------
-            //MATRIZ RESULTADO
-            double[][] matrizR = new double[matrizInv.length][matriz2[0].length];
-
-            //MULTIPLICACIÓN
-            if (matrizInv[0].length == matriz2.length) {
-                for (int i = 0; i < matrizInv.length; i++) {
-                    for (int j = 0; j < matriz2[0].length; j++) {
-                        for (int k = 0; k < matrizInv[0].length; k++) {
-                            matrizR[i][j] += matrizInv[i][k] * matriz2[k][j];
+        if (Letra == 'R' && Letra2 == 'R') {
+            if (Letra == 'R') {
+                double[][] matriz2 = leer_matriz(s, Letra2);
+                if (Matriz_R != null && matriz2 != null) {
+                    //------------------------INVERSA MATRIZ A-----------------------------
+                    //--------------------------DETERMINANTE--------------------------
+                    //DIAGONALES POSITIVAS
+                    double[][] matrizT = new double[Matriz_R.length][Matriz_R[0].length];
+                    int Diagonal = 1;
+                    int Diagonal2 = 1;
+                    int Diagonal3 = 1;
+                    for (int i = 0; i < Matriz_R.length; i++) {
+                        for (int j = 0; j < Matriz_R[i].length; j++) {
+                            if (i == j) {
+                                Diagonal *= Matriz_R[i][j];
+                            }
+                            if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
+                                Diagonal2 *= Matriz_R[i][j];
+                            }
+                            if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
+                                Diagonal3 *= Matriz_R[i][j];
+                            }
                         }
                     }
-                }
-            } else {
-                System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
-            }
 
-            System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
-            System.out.println("");
-            for (int i = 0; i < matrizR.length; i++) {
-                for (int j = 0; j < matrizR[i].length; j++) {
-                    System.out.print(matrizR[i][j] + "\t");
-                }
-                System.out.println("");
-            }
-            System.out.println("");
-        }
+                    //DIAGONALES CONTRARIAS
+                    int Diagonal4 = 1;
+                    int Diagonal5 = 1;
+                    int Diagonal6 = 1;
+                    for (int i = 0; i < Matriz_R.length; i++) {
+                        for (int j = 0; j < Matriz_R[i].length; j++) {
+                            if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
+                                Diagonal4 *= Matriz_R[i][j];
+                            }
+                            if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
+                                Diagonal5 *= Matriz_R[i][j];
+                            }
+                            if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
+                                Diagonal6 *= Matriz_R[i][j];
+                            }
+                        }
+                    }
 
-    }
+                    double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
+                    if (Det == 0) {
+                        System.out.println("La matriz ingresada no tiene inversa porque su determinante es cero");
+                    } else {
 
-    //-------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------
-    public static void PotenciaMatriz() {
+                        //--------------------------TRANSPUESTA--------------------------
+                        for (int i = 0; i < Matriz_R.length; i++) {
+                            for (int j = 0; j < Matriz_R[i].length; j++) {
+                                matrizT[i][j] = Matriz_R[j][i];
+                            }
+                        }
 
-        System.out.println("Ingrese la letra de la primera matriz(A-Z): ");
-        char Letra = Escribir.next().charAt(0);
-        double[][] matriz1 = leer_matriz(s, Letra);
-        double[][] aux_matriz = leer_matriz(s, Letra);
-        System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
-        int Exponente = Escribir.nextInt();
+                        //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
+                        double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
+                        for (int i = 0; i < matrizT.length; i++) {
+                            for (int j = 0; j < matrizT[i].length; j++) {
+                                if (i == 0 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[1][1] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][1]));
+                                }
+                                if (i == 0 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][0])) * (-1);
+                                }
+                                if (i == 0 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][1]) - (matrizT[1][1] * matrizT[2][0]));
+                                }
+                                if (i == 1 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[0][1] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][1])) * (-1);
+                                }
+                                if (i == 1 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][0]));
+                                }
+                                if (i == 1 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][1]) - (matrizT[0][1] * matrizT[2][0])) * (-1);
+                                }
+                                if (i == 2 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[0][1] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][1]));
+                                }
+                                if (i == 2 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][0])) * (-1);
+                                }
+                                if (i == 2 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][1]) - (matrizT[0][1] * matrizT[1][0]));
+                                }
+                            }
+                        }
+                        //-------------------ADJUNTA DIVIDIDA POR DETERMINANTE = INVERSA-------------------
+                        double[][] matrizInv = new double[matrizAdj.length][matrizAdj[0].length];
+                        for (int i = 0; i < matrizAdj.length; i++) {
+                            for (int j = 0; j < matrizAdj[i].length; j++) {
+                                matrizInv[i][j] = (double) (matrizAdj[i][j] / Det);
+                            }
+                        }
 
-        //--------------------------POTENCIA--------------------------//
-        double[][] matrizR = new double[matriz1.length][matriz1[0].length];
-        int contador = 0;
-        double operacion = 0.0;
-        if (matriz1[0].length == matriz1.length) {
-            if (Exponente == 1) {
-                for (int i = 0; i < matriz1.length; i++) {
-                    for (int j = 0; j < matriz1[i].length; j++) {
-                        matrizR[i][j] = matriz1[i][j] * 1;
+                        //-------------------MULTIPLICACIÓN A^-1 * B = DIVISIÓN-------------------
+                        //MATRIZ RESULTADO
+                        double[][] matrizR = new double[matrizInv.length][matriz2[0].length];
+
+                        //MULTIPLICACIÓN
+                        if (matrizInv[0].length == matriz2.length) {
+                            for (int i = 0; i < matrizInv.length; i++) {
+                                for (int j = 0; j < matriz2[0].length; j++) {
+                                    for (int k = 0; k < matrizInv[0].length; k++) {
+                                        matrizR[i][j] += matrizInv[i][k] * matriz2[k][j];
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
+                        }
+
+                        System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                        System.out.println("");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
+                        System.out.println("");
                     }
                 }
-                System.out.println("");
-                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                for (int i = 0; i < matrizR.length; i++) {
-                    for (int j = 0; j < matrizR[i].length; j++) {
-                        System.out.print(matrizR[i][j] + "\t");
+            } else if (Letra2 == 'R') {
+
+                double[][] matriz1 = leer_matriz(s, Letra);
+                if (matriz1 != null && Matriz_R != null) {
+                    //------------------------INVERSA MATRIZ A-----------------------------
+                    //--------------------------DETERMINANTE--------------------------
+                    //DIAGONALES POSITIVAS
+                    double[][] matrizT = new double[matriz1.length][matriz1[0].length];
+                    int Diagonal = 1;
+                    int Diagonal2 = 1;
+                    int Diagonal3 = 1;
+                    for (int i = 0; i < matriz1.length; i++) {
+                        for (int j = 0; j < matriz1[i].length; j++) {
+                            if (i == j) {
+                                Diagonal *= matriz1[i][j];
+                            }
+                            if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
+                                Diagonal2 *= matriz1[i][j];
+                            }
+                            if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
+                                Diagonal3 *= matriz1[i][j];
+                            }
+                        }
                     }
-                    {
+
+                    //DIAGONALES CONTRARIAS
+                    int Diagonal4 = 1;
+                    int Diagonal5 = 1;
+                    int Diagonal6 = 1;
+                    for (int i = 0; i < matriz1.length; i++) {
+                        for (int j = 0; j < matriz1[i].length; j++) {
+                            if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
+                                Diagonal4 *= matriz1[i][j];
+                            }
+                            if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
+                                Diagonal5 *= matriz1[i][j];
+                            }
+                            if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
+                                Diagonal6 *= matriz1[i][j];
+                            }
+                        }
+                    }
+
+                    double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
+                    if (Det == 0) {
+                        System.out.println("La matriz ingresada no tiene inversa porque su determinante es cero");
+                    } else {
+
+                        //--------------------------TRANSPUESTA--------------------------
+                        for (int i = 0; i < matriz1.length; i++) {
+                            for (int j = 0; j < matriz1[i].length; j++) {
+                                matrizT[i][j] = matriz1[j][i];
+                            }
+                        }
+
+                        //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
+                        double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
+                        for (int i = 0; i < matrizT.length; i++) {
+                            for (int j = 0; j < matrizT[i].length; j++) {
+                                if (i == 0 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[1][1] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][1]));
+                                }
+                                if (i == 0 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][0])) * (-1);
+                                }
+                                if (i == 0 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][1]) - (matrizT[1][1] * matrizT[2][0]));
+                                }
+                                if (i == 1 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[0][1] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][1])) * (-1);
+                                }
+                                if (i == 1 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][0]));
+                                }
+                                if (i == 1 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][1]) - (matrizT[0][1] * matrizT[2][0])) * (-1);
+                                }
+                                if (i == 2 && j == 0) {
+                                    matrizAdj[i][j] = ((matrizT[0][1] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][1]));
+                                }
+                                if (i == 2 && j == 1) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][0])) * (-1);
+                                }
+                                if (i == 2 && j == 2) {
+                                    matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][1]) - (matrizT[0][1] * matrizT[1][0]));
+                                }
+                            }
+                        }
+                        //-------------------ADJUNTA DIVIDIDA POR DETERMINANTE = INVERSA-------------------
+                        double[][] matrizInv = new double[matrizAdj.length][matrizAdj[0].length];
+                        for (int i = 0; i < matrizAdj.length; i++) {
+                            for (int j = 0; j < matrizAdj[i].length; j++) {
+                                matrizInv[i][j] = (double) (matrizAdj[i][j] / Det);
+                            }
+                        }
+
+                        //-------------------MULTIPLICACIÓN A^-1 * B = DIVISIÓN-------------------
+                        //MATRIZ RESULTADO
+                        double[][] matrizR = new double[matrizInv.length][Matriz_R[0].length];
+
+                        //MULTIPLICACIÓN
+                        if (matrizInv[0].length == Matriz_R.length) {
+                            for (int i = 0; i < matrizInv.length; i++) {
+                                for (int j = 0; j < Matriz_R[0].length; j++) {
+                                    for (int k = 0; k < matrizInv[0].length; k++) {
+                                        matrizR[i][j] += matrizInv[i][k] * Matriz_R[k][j];
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
+                        }
+
+                        System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                        System.out.println("");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
                         System.out.println("");
                     }
                 }
             }
-            if (Exponente > 1) {
+        } else {
+            double[][] matriz2 = leer_matriz(s, Letra2);
+            double[][] matriz1 = leer_matriz(s, Letra);
+            if (matriz2 != null && matriz1 != null) {
+                //------------------------INVERSA MATRIZ A-----------------------------
+                //--------------------------DETERMINANTE--------------------------
+                //DIAGONALES POSITIVAS
+                double[][] matrizT = new double[matriz1.length][matriz1[0].length];
+                int Diagonal = 1;
+                int Diagonal2 = 1;
+                int Diagonal3 = 1;
+                for (int i = 0; i < matriz1.length; i++) {
+                    for (int j = 0; j < matriz1[i].length; j++) {
+                        if (i == j) {
+                            Diagonal *= matriz1[i][j];
+                        }
+                        if ((i == 1 && j == 0) || (i == 2 && j == 1) || (i == 0 && j == 2)) {
+                            Diagonal2 *= matriz1[i][j];
+                        }
+                        if ((i == 0 && j == 1) || (i == 1 && j == 2) || (i == 2 && j == 0)) {
+                            Diagonal3 *= matriz1[i][j];
+                        }
+                    }
+                }
 
-                for (int m = 1; m < Exponente; m++) {
+                //DIAGONALES CONTRARIAS
+                int Diagonal4 = 1;
+                int Diagonal5 = 1;
+                int Diagonal6 = 1;
+                for (int i = 0; i < matriz1.length; i++) {
+                    for (int j = 0; j < matriz1[i].length; j++) {
+                        if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 0)) {
+                            Diagonal4 *= matriz1[i][j];
+                        }
+                        if ((i == 1 && j == 2) || (i == 2 && j == 1) || (i == 0 && j == 0)) {
+                            Diagonal5 *= matriz1[i][j];
+                        }
+                        if ((i == 0 && j == 1) || (i == 1 && j == 0) || (i == 2 && j == 2)) {
+                            Diagonal6 *= matriz1[i][j];
+                        }
+                    }
+                }
 
+                double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
+                if (Det == 0) {
+                    System.out.println("La matriz ingresada no tiene inversa porque su determinante es cero");
+                } else {
+
+                    //--------------------------TRANSPUESTA--------------------------
                     for (int i = 0; i < matriz1.length; i++) {
+                        for (int j = 0; j < matriz1[i].length; j++) {
+                            matrizT[i][j] = matriz1[j][i];
+                        }
+                    }
 
-                        for (int k = 0; k < matriz1[i].length; k++) {
-
-                            operacion = 0;
-                            contador = 0;
-
-                            for (int j = 0; j < matriz1[i].length; j++) {
-                                contador++;
-                                operacion = matriz1[i][j] * aux_matriz[j][k] + operacion;
-
-                                if (contador == matriz1[i].length) {
-                                    matrizR[i][k] = operacion;
-                                }
+                    //-------------------ADJUNTA DE LA TRANSPUESTA-------------------
+                    double[][] matrizAdj = new double[matrizT.length][matrizT[0].length];
+                    for (int i = 0; i < matrizT.length; i++) {
+                        for (int j = 0; j < matrizT[i].length; j++) {
+                            if (i == 0 && j == 0) {
+                                matrizAdj[i][j] = ((matrizT[1][1] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][1]));
+                            }
+                            if (i == 0 && j == 1) {
+                                matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][2]) - (matrizT[1][2] * matrizT[2][0])) * (-1);
+                            }
+                            if (i == 0 && j == 2) {
+                                matrizAdj[i][j] = ((matrizT[1][0] * matrizT[2][1]) - (matrizT[1][1] * matrizT[2][0]));
+                            }
+                            if (i == 1 && j == 0) {
+                                matrizAdj[i][j] = ((matrizT[0][1] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][1])) * (-1);
+                            }
+                            if (i == 1 && j == 1) {
+                                matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][2]) - (matrizT[0][2] * matrizT[2][0]));
+                            }
+                            if (i == 1 && j == 2) {
+                                matrizAdj[i][j] = ((matrizT[0][0] * matrizT[2][1]) - (matrizT[0][1] * matrizT[2][0])) * (-1);
+                            }
+                            if (i == 2 && j == 0) {
+                                matrizAdj[i][j] = ((matrizT[0][1] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][1]));
+                            }
+                            if (i == 2 && j == 1) {
+                                matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][2]) - (matrizT[0][2] * matrizT[1][0])) * (-1);
+                            }
+                            if (i == 2 && j == 2) {
+                                matrizAdj[i][j] = ((matrizT[0][0] * matrizT[1][1]) - (matrizT[0][1] * matrizT[1][0]));
                             }
                         }
                     }
-                    for (int i = 0; i < matriz1.length; i++) {
-                        for (int j = 0; j < matriz1[i].length; j++) {
-                            aux_matriz[i][j] = matrizR[i][j];
+                    //-------------------ADJUNTA DIVIDIDA POR DETERMINANTE = INVERSA-------------------
+                    double[][] matrizInv = new double[matrizAdj.length][matrizAdj[0].length];
+                    for (int i = 0; i < matrizAdj.length; i++) {
+                        for (int j = 0; j < matrizAdj[i].length; j++) {
+                            matrizInv[i][j] = (double) (matrizAdj[i][j] / Det);
                         }
                     }
-                }
 
-                System.out.println("");
-                System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
-                for (int i = 0; i < matriz1.length; i++) {
-                    for (int j = 0; j < matriz1[i].length; j++) {
-                        System.out.print("  " + matrizR[i][j] + "\t");
+                    //-------------------MULTIPLICACIÓN A^-1 * B = DIVISIÓN-------------------
+                    //MATRIZ RESULTADO
+                    double[][] matrizR = new double[matrizInv.length][matriz2[0].length];
+
+                    //MULTIPLICACIÓN
+                    if (matrizInv[0].length == matriz2.length) {
+                        for (int i = 0; i < matrizInv.length; i++) {
+                            for (int j = 0; j < matriz2[0].length; j++) {
+                                for (int k = 0; k < matrizInv[0].length; k++) {
+                                    matrizR[i][j] += matrizInv[i][k] * matriz2[k][j];
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                     }
+
+                    System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                    System.out.println("");
+                    imprimir_matriz(matrizR);
+                    set_matrizR(matrizR);
                     System.out.println("");
                 }
+            }
+        }
 
+    }
+
+    // Falta reporte
+    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    public static void PotenciaMatriz() {
+
+        System.out.println("Ingrese la letra de la matriz(A-Z): ");
+        char letra = Escribir.next().charAt(0);
+
+        System.out.println("Ingrese un número para elevar la matriz seleccionada: ");
+        int Exponente = Escribir.nextInt();
+        char Letra = Character.toUpperCase(letra);
+
+        //--------------------------POTENCIA--------------------------//
+        if (Letra == 'R') {
+            double[][] aux_matriz = copy_matrizR(Matriz_R);
+            double[][] matrizR = new double[Matriz_R.length][Matriz_R[0].length];
+
+            int contador = 0;
+            double operacion = 0.0;
+            if (Matriz_R != null) {
+                if (Matriz_R[0].length == Matriz_R.length) {
+                    if (Exponente == 1) {
+                        for (int i = 0; i < Matriz_R.length; i++) {
+                            for (int j = 0; j < Matriz_R[i].length; j++) {
+                                matrizR[i][j] = Matriz_R[i][j] * 1;
+                            }
+                        }
+                        System.out.println("");
+                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
+                    }
+                    if (Exponente > 1) {
+
+                        for (int m = 1; m < Exponente; m++) {
+
+                            for (int i = 0; i < Matriz_R.length; i++) {
+
+                                for (int k = 0; k < Matriz_R[i].length; k++) {
+
+                                    operacion = 0;
+                                    contador = 0;
+
+                                    for (int j = 0; j < Matriz_R[i].length; j++) {
+                                        contador++;
+                                        operacion = Matriz_R[i][j] * aux_matriz[j][k] + operacion;
+
+                                        if (contador == Matriz_R[i].length) {
+                                            matrizR[i][k] = operacion;
+                                        }
+                                    }
+                                }
+                            }
+                            for (int i = 0; i < Matriz_R.length; i++) {
+                                for (int j = 0; j < Matriz_R[i].length; j++) {
+                                    aux_matriz[i][j] = matrizR[i][j];
+                                }
+                            }
+                        }
+
+                        System.out.println("");
+                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
+
+                    }
+                } else {
+                    System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
+                }
             }
         } else {
-            System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
+            double[][] matriz1 = leer_matriz(s, Letra);
+            if (matriz1 != null) {
+                double[][] aux_matriz = leer_matriz(s, Letra);
+                double[][] matrizR = new double[matriz1.length][matriz1[0].length];
+                int contador = 0;
+                double operacion = 0.0;
+                if (matriz1[0].length == matriz1.length) {
+                    if (Exponente == 1) {
+                        for (int i = 0; i < matriz1.length; i++) {
+                            for (int j = 0; j < matriz1[i].length; j++) {
+                                matrizR[i][j] = matriz1[i][j] * 1;
+                            }
+                        }
+                        System.out.println("");
+                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
+                    }
+                    if (Exponente > 1) {
+
+                        for (int m = 1; m < Exponente; m++) {
+
+                            for (int i = 0; i < matriz1.length; i++) {
+
+                                for (int k = 0; k < matriz1[i].length; k++) {
+
+                                    operacion = 0;
+                                    contador = 0;
+
+                                    for (int j = 0; j < matriz1[i].length; j++) {
+                                        contador++;
+                                        operacion = matriz1[i][j] * aux_matriz[j][k] + operacion;
+
+                                        if (contador == matriz1[i].length) {
+                                            matrizR[i][k] = operacion;
+                                        }
+                                    }
+                                }
+                            }
+                            for (int i = 0; i < matriz1.length; i++) {
+                                for (int j = 0; j < matriz1[i].length; j++) {
+                                    aux_matriz[i][j] = matrizR[i][j];
+                                }
+                            }
+                        }
+
+                        System.out.println("");
+                        System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
+                        imprimir_matriz(matrizR);
+                        set_matrizR(matrizR);
+
+                    }
+                } else {
+                    System.out.println("No se puede operar la matriz seleccionada porque no corresponden sus dimensiones");
+                }
+            }
         }
     }
+// FALTA REPORTE
 
-    public static void get_matrizR() {
-        try {
-            Matriz_R = leer_matriz(s, 'R');
-            //imprimir_matriz(Matriz_R);
-        } catch (Exception e) {
+    //-------------------------------------------------------------------------------------------------------------
 
-        }
-    }
 
     public static void imprimir_matriz(double[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
@@ -1308,6 +1597,19 @@ public class Main {
             System.out.println();
         }
     }
+    //-------------------------------------------------------------------------------------------------------------
+
+    //OPERACIONES AUXILIARES DE LA MATRIZ R
+
+    public static void get_matrizR() {
+        try {
+            Matriz_R = leer_matriz(s, 'R');
+            //imprimir_matriz(Matriz_R);
+        } catch (Exception e) {
+
+        }
+    }
+    //-------------------------------------------------------------------------------------------------------------
 
     public static void set_matrizR(double matriz[][]) {
         Matriz_R = new double[matriz.length][matriz[0].length];
@@ -1319,9 +1621,27 @@ public class Main {
         }
         System.out.println(Matriz_R[0][0]);
     }
+    //-------------------------------------------------------------------------------------------------------------
 
     public static void controlR() {
         imprimir_matriz(Matriz_R);
     }
+    //-------------------------------------------------------------------------------------------------------------
+
+    public static double[][] copy_matrizR(double MatrizR[][]) {
+        try {
+            double[][] matriz = new double[MatrizR.length][MatrizR[0].length];
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[0].length; j++) {
+                    matriz[i][j] = MatrizR[i][j];
+                }
+            }
+            return matriz;
+        } catch (Exception e) {
+            System.out.println("Matriz R nula");
+        }
+        return null;
+    }
+    //-------------------------------------------------------------------------------------------------------------
 }
 
