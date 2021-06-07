@@ -115,6 +115,7 @@ public class Main {
 //-------------------------------------------------------------------------------------------------------------
                 case "0":
                     System.out.println("------FIN DEL PROGRAMA------");
+                    animacion_grupo();
                     op = "0";
                     break;
 
@@ -171,57 +172,60 @@ public class Main {
     //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
     public static double[][] leer_matriz(String archivo, char identificador) {
-
-        matrices = archivo.split("\n");
-        for (int i = 0; i < matrices.length; i++) {
-            // System.out.println(matrices[i]);
-        }
-
-        boolean encontrado = false;
-        int indice = 0;
-        for (int i = 0; i < matrices.length && i < 26; i++) {
-            char a[] = matrices[i].toCharArray();
-            if (encontrado == true) {
-                break;
-
+        if (identificador == 'R' && Matriz_R != null){
+            return gtmatrizR();
+        }else {
+            matrices = archivo.split("\n");
+            for (int i = 0; i < matrices.length; i++) {
+                // System.out.println(matrices[i]);
             }
-            for (int j = 0; j < a.length; j++) {
-                if (a[j] == identificador && Character.isAlphabetic(identificador)) {
-                    encontrado = true;
-                    indice = i;
+
+            boolean encontrado = false;
+            int indice = 0;
+            for (int i = 0; i < matrices.length && i < 26; i++) {
+                char a[] = matrices[i].toCharArray();
+                if (encontrado == true) {
                     break;
+
+                }
+                for (int j = 0; j < a.length; j++) {
+                    if (a[j] == identificador && Character.isAlphabetic(identificador)) {
+                        encontrado = true;
+                        indice = i;
+                        break;
+                    }
+
                 }
 
             }
 
-        }
+            if (encontrado == true) {
+                System.out.println();
+                indice = comprobar_duplicidad(identificador);
 
-        if (encontrado == true) {
-            System.out.println();
-            indice = comprobar_duplicidad(identificador);
+                String tmp[] = matrices[indice].split(";");
+                tmp[0] = tmp[0].replace(identificador + ":", "");
+                int filas = tmp.length;
+                //System.out.println(filas);
 
-            String tmp[] = matrices[indice].split(";");
-            tmp[0] = tmp[0].replace(identificador + ":", "");
-            int filas = tmp.length;
-            //System.out.println(filas);
+                int columnas = tmp[0].split(",").length;
+                // System.out.println(columnas);
+                double matriz[][] = new double[filas][columnas];
+                for (int i = 0; i < tmp.length; i++) {
+                    String celdas[] = tmp[i].split(",");
+                    for (int j = 0; j < celdas.length; j++) {
+                        matriz[i][j] = Double.valueOf(celdas[j]);
+                    }
 
-            int columnas = tmp[0].split(",").length;
-            // System.out.println(columnas);
-            double matriz[][] = new double[filas][columnas];
-            for (int i = 0; i < tmp.length; i++) {
-                String celdas[] = tmp[i].split(",");
-                for (int j = 0; j < celdas.length; j++) {
-                    matriz[i][j] = Double.valueOf(celdas[j]);
                 }
 
+                //System.out.println("MATRIZ " +identificador+":");
+                //imprimir_matriz(matriz);
+                return matriz;
+            } else {
+                System.out.println("No se ha encontrado la matriz");
+                return null;
             }
-
-            //System.out.println("MATRIZ " +identificador+":");
-            //imprimir_matriz(matriz);
-            return matriz;
-        } else {
-            System.out.println("No se ha encontrado la matriz");
-            return null;
         }
 
     }
@@ -967,12 +971,9 @@ public class Main {
                             }
                             System.out.println("\n La Matriz Inversa de " + Letra + " es: ");
                             System.out.println("");
-                            for (int i = 0; i < matrizInv.length; i++) {
-                                for (int j = 0; j < matrizInv[i].length; j++) {
-                                    System.out.print("[" + matrizInv[i][j] + "]" + "\t");
-                                }
-                                System.out.println("");
-                            }
+                            imprimir_matriz(matrizInv);
+                            rep.add_inversa(matriz1, matrizInv, Letra);
+                            set_matrizR(matrizInv);
                             System.out.println("");
                         }
 
@@ -1252,6 +1253,7 @@ public class Main {
                         System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
                         System.out.println("");
                         imprimir_matriz(matrizR);
+                        rep.add_división(Matriz_R,matriz2,matrizR,Letra,Letra2);
                         set_matrizR(matrizR);
                         System.out.println("");
                     }
@@ -1372,6 +1374,7 @@ public class Main {
                         System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
                         System.out.println("");
                         imprimir_matriz(matrizR);
+                        rep.add_división(matriz1,Matriz_R,matrizR,Letra,Letra2);
                         set_matrizR(matrizR);
                         System.out.println("");
                     }
@@ -1493,6 +1496,7 @@ public class Main {
                     System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
                     System.out.println("");
                     imprimir_matriz(matrizR);
+                    rep.add_división(matriz1,matriz2,matrizR,Letra,Letra2);
                     set_matrizR(matrizR);
                     System.out.println("");
                 }
@@ -1501,7 +1505,6 @@ public class Main {
 
     }
 
-    // Falta reporte
     //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
     public static void PotenciaMatriz() {
@@ -1535,6 +1538,7 @@ public class Main {
                                 System.out.println("");
                                 System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
                                 imprimir_matriz(matrizR);
+                                rep.add_potencia(Matriz_R,matrizR,Exponente,Letra);
                                 set_matrizR(matrizR);
                             }
 
@@ -1547,6 +1551,7 @@ public class Main {
                                 System.out.println("");
                                 System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
                                 imprimir_matriz(matrizR);
+                                rep.add_potencia(Matriz_R,matrizR,Exponente,Letra);
                                 set_matrizR(matrizR);
                             }
                             if (Exponente > 1) {
@@ -1580,6 +1585,7 @@ public class Main {
                                 System.out.println("");
                                 System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
                                 imprimir_matriz(matrizR);
+                                rep.add_potencia(Matriz_R,matrizR,Exponente,Letra);
                                 set_matrizR(matrizR);
 
                             }
@@ -1607,6 +1613,7 @@ public class Main {
                                 System.out.println("");
                                 System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
                                 imprimir_matriz(matrizR);
+                                rep.add_potencia(matriz1,matrizR,Exponente,Letra);
                                 set_matrizR(matrizR);
                             }
                             
@@ -1652,6 +1659,7 @@ public class Main {
                                 System.out.println("");
                                 System.out.println("La matriz " + Letra + " elevada a " + Exponente + " es:");
                                 imprimir_matriz(matrizR);
+                                rep.add_potencia(matriz1,matrizR,Exponente,Letra);
                                 set_matrizR(matrizR);
 
                             }
@@ -1747,8 +1755,37 @@ public class Main {
         }
         return null;
     }
+    public static double[][] gtmatrizR(){
+        return Matriz_R;
+    }
+    public static void animacion_grupo(){
+        try {
+            System.out.println("   _____                                    _____ ");
+            Thread.sleep(200);
+            System.out.println("  / ____|                                  | ____|");
+            Thread.sleep(200);
+            System.out.println(" | |  __   _ __   _   _   _ __     ___     | |__  ");
+            Thread.sleep(200);
+            System.out.println(" | | |_ | | '__| | | | | | '_ \\   / _ \\    |___ \\ ");
+            Thread.sleep(200);
+            System.out.println(" | |__| | | |    | |_| | | |_) | | (_) |    ___) |");
+            Thread.sleep(200);
+            System.out.println(" \\_____| |_|     \\__,_| | .__/   \\___/    |____/ ");
+            Thread.sleep(200);
+            System.out.println("                         | |                      ");
+            Thread.sleep(200);
+            System.out.println("                         |_|                      ");
+            Thread.sleep(200);
+        }catch (Exception e){
+
+        }
+    }
 
     //-------------------------------------------------------------------------------------------------------------
 }
+
+
+//-------------------------------------------------------------------------------------------------------------
+
 
 
