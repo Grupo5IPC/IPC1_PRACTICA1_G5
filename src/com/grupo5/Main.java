@@ -213,15 +213,9 @@ public class Main {
                 }
 
             }
-/*
-            for (int i = 0; i < matriz.length; i++) {
-                for (int j = 0; j < matriz[0].length; j++) {
-                    System.out.print(matriz[i][j] + ",");
-                }
-                System.out.println();
-            }
-*/
 
+            //System.out.println("MATRIZ " +identificador+":");
+            //imprimir_matriz(matriz);
             return matriz;
         } else {
             System.out.println("No se ha encontrado la matriz");
@@ -251,7 +245,7 @@ public class Main {
         if (Letra == 'R' || Letra2 == 'R') {
            // System.out.println(1);
             if (Letra == 'R') {
-                System.out.println(1);
+                //System.out.println(1);
                 double[][] matriz2 = leer_matriz(s, Letra2);
 
                 if (matriz2 != null && Matriz_R != null) {
@@ -265,10 +259,15 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
+                        System.out.println("Matriz "+Letra+" :");
+                        imprimir_matriz(Matriz_R);
+                        System.out.println();
+                        System.out.println("Matriz "+Letra2+" :");
+                        imprimir_matriz(matriz2);
+                        System.out.println();
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
-
                         rep.add_suma(Matriz_R, matriz2, matrizR, Letra, Letra2);
                         set_matrizR(matrizR);
                         System.out.println();
@@ -292,6 +291,10 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
+                        System.out.println("Matriz "+Letra+" :");
+                        imprimir_matriz(matriz2);
+                        System.out.println("Matriz "+Letra2+" :");
+                        imprimir_matriz(Matriz_R);
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
@@ -305,7 +308,7 @@ public class Main {
 
         } else {
 
-            System.out.println(2);
+            //System.out.println(2);
             double[][] matriz2 = leer_matriz(s, Letra2);
             double[][] matriz1 = leer_matriz(s, Letra);
             if (matriz1 != null && matriz2 != null) {
@@ -321,20 +324,24 @@ public class Main {
 
                     //IMPRIMIR MATRIZ SUMA
                     System.out.println("");
+                    System.out.println("Matriz "+Letra+" :");
+                    imprimir_matriz(matriz1);
+                    System.out.println();
+                    System.out.println("Matriz "+Letra2+" :");
+                    imprimir_matriz(matriz2);
+                    System.out.println();
                     System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
                     System.out.println("");
-                    for (int i = 0; i < matrizR.length; i++) {
-                        for (int j = 0; j < matrizR[i].length; j++) {
-                            System.out.print("[" + matrizR[i][j] + "]");
-
-                        }
-                        System.out.println("");
-                    }
+                    imprimir_matriz(matrizR);
 
                     System.out.println();
                     rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
                     set_matrizR(matrizR);
+                }else{
+                    System.out.println("Error: Las matrices no coinciden en tamaño");
                 }
+            }else{
+                System.out.println("Error: La matriz solicitada no fue encontrada");
             }
         }
 
@@ -370,6 +377,12 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
+                        System.out.println("Matriz "+Letra+" :");
+                        imprimir_matriz(Matriz_R);
+                        System.out.println();
+                        System.out.println("Matriz "+Letra2+" :");
+                        imprimir_matriz(matriz2);
+                        System.out.println();
                         System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
@@ -392,6 +405,12 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
+                        System.out.println("Matriz "+Letra+" :");
+                        imprimir_matriz(matriz2);
+                        System.out.println();
+                        System.out.println("Matriz "+Letra2+" :");
+                        imprimir_matriz(Matriz_R);
+                        System.out.println();
                         System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
@@ -399,7 +418,11 @@ public class Main {
                         rep.add_resta(matriz2, Matriz_R, matrizR, Letra, Letra2);
                         set_matrizR(matrizR);
                         System.out.println();
+                    }else{
+                        System.out.println("Error: El numero de filas y columnas debe coincidir entre las matrices");
                     }
+                }else{
+                    System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             }
 
@@ -453,7 +476,7 @@ public class Main {
                 double[][] matriz2 = leer_matriz(s, Letra2);
                 if (Matriz_R != null && matriz2 != null) {
                     double matrizR[][] = new double[Matriz_R[0].length][matriz2.length];
-                    if (matriz2 != null) {
+
                         if (Matriz_R[0].length == matriz2.length) {
 
                             for (int i = 0; i < Matriz_R.length; i++) {
@@ -465,6 +488,12 @@ public class Main {
                             }
                             //IMPRIMIR MATRIZ
                             System.out.println("");
+                            System.out.println("Matriz "+Letra+" :");
+                            imprimir_matriz(Matriz_R);
+                            System.out.println();
+                            System.out.println("Matriz "+Letra2+" :");
+                            imprimir_matriz(matriz2);
+                            System.out.println();
                             System.out.println("La Multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
                             System.out.println("");
                             imprimir_matriz(matrizR);
@@ -476,7 +505,9 @@ public class Main {
                             System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                         }
 
-                    }
+
+                }else{
+                    System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             } else {
                 double[][] matriz2 = leer_matriz(s, Letra);
@@ -492,6 +523,12 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
+                        System.out.println("Matriz "+Letra+" :");
+                        imprimir_matriz(matriz2);
+                        System.out.println();
+                        System.out.println("Matriz "+Letra2+" :");
+                        imprimir_matriz(Matriz_R);
+                        System.out.println();
                         System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
@@ -503,6 +540,8 @@ public class Main {
                         System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                     }
 
+                }else{
+                    System.out.println("Error: no se ha encontrado alguna de las matrices");
                 }
             }
 
@@ -528,6 +567,12 @@ public class Main {
                     }
                     //IMPRIMIR MATRIZ MULTIPLICACIÓN
                     System.out.println("");
+                    System.out.println("Matriz "+Letra+" :");
+                    imprimir_matriz(matriz1);
+                    System.out.println();
+                    System.out.println("Matriz "+Letra2+" :");
+                    imprimir_matriz(matriz2);
+                    System.out.println();
                     System.out.println("La multiplicacion de las matrices " + Letra + " y " + Letra2 + " es:");
                     System.out.println("");
                     imprimir_matriz(matrizR);
@@ -536,7 +581,10 @@ public class Main {
                 } else {
                     System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                 }
+            }else{
+                System.out.println("Error: No se ha podido encontrar alguna de las matrices");
             }
+
         }
 
     }
@@ -564,6 +612,10 @@ public class Main {
 
                 //IMPRIMIR MATRIZ MULTIPLICADA CON EL NUMERO
                 System.out.println("");
+                System.out.println("Matriz "+Letra+" :");
+                imprimir_matriz(Matriz_R);
+                System.out.println();
+
                 System.out.println("La multiplicacion de la matriz " + Letra + " con el número " + Numero + " es:");
                 System.out.println("");
                 imprimir_matriz(matrizR);
