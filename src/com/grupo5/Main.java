@@ -12,6 +12,7 @@ public class Main {
     public static Reportes rep = new Reportes();
     public static String op = "";
     public static double Matriz_R[][];
+    public static String [] matrices;
 
     public static void main(String[] args) {
         String prueba = "";
@@ -44,6 +45,7 @@ public class Main {
                 case "1":
                     System.out.println("------SUMA DE MATRICES------");
                     suma_matriz();
+                    //comprobar_duplicidad('A');
                     break;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -168,7 +170,7 @@ public class Main {
 //-------------------------------------------------------------------------------------------------------------
     public static double[][] leer_matriz(String archivo, char identificador) {
 
-        String[] matrices = archivo.split("\n");
+        matrices = archivo.split("\n");
         for (int i = 0; i < matrices.length; i++) {
             // System.out.println(matrices[i]);
         }
@@ -194,6 +196,7 @@ public class Main {
 
         if (encontrado == true) {
             System.out.println();
+            indice = comprobar_duplicidad(identificador);
 
             String tmp[] = matrices[indice].split(";");
             tmp[0] = tmp[0].replace(identificador + ":", "");
@@ -217,8 +220,8 @@ public class Main {
                 }
                 System.out.println();
             }
+*/
 
- */
             return matriz;
         } else {
             System.out.println("No se ha encontrado la matriz");
@@ -242,10 +245,13 @@ public class Main {
         // TRANSFORMACION A MAYUSCULAS
         char Letra = Character.toUpperCase(letra);
         char Letra2 = Character.toUpperCase(letra2);
+        //System.out.println(Letra);
+       // System.out.println(letra2);
 
         if (Letra == 'R' || Letra2 == 'R') {
+           // System.out.println(1);
             if (Letra == 'R') {
-
+                System.out.println(1);
                 double[][] matriz2 = leer_matriz(s, Letra2);
 
                 if (matriz2 != null && Matriz_R != null) {
@@ -270,10 +276,13 @@ public class Main {
                 } else {
 
                 }
-            } else {
+            } else if(Letra2 == 'R') {
+                //System.out.println(2);
                 double[][] matriz2 = leer_matriz(s, Letra);
                 if (matriz2 != null && Matriz_R != null) {
+                    //System.out.println(3);
                     if ((Matriz_R.length == matriz2.length) && (matriz2[0].length == Matriz_R[0].length)) {
+                        //System.out.println(4);
                         double[][] matrizR = new double[matriz2.length][matriz2[0].length];
                         for (int i = 0; i < matriz2.length; i++) {
                             for (int j = 0; j < matriz2[i].length; j++) {
@@ -296,34 +305,36 @@ public class Main {
 
         } else {
 
-
+            System.out.println(2);
             double[][] matriz2 = leer_matriz(s, Letra2);
             double[][] matriz1 = leer_matriz(s, Letra);
             if (matriz1 != null && matriz2 != null) {
-                //SUMA
-                double[][] matrizR = new double[matriz1.length][matriz1[0].length];
-                for (int i = 0; i < matriz1.length; i++) {
-                    for (int j = 0; j < matriz1[i].length; j++) {
-                        matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
-                    }
-
-                }
-
-                //IMPRIMIR MATRIZ SUMA
-                System.out.println("");
-                System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
-                System.out.println("");
-                for (int i = 0; i < matrizR.length; i++) {
-                    for (int j = 0; j < matrizR[i].length; j++) {
-                        System.out.print("[" + matrizR[i][j] + "]");
+                if ((matriz1.length == matriz2.length) && (matriz2[0].length == matriz1[0].length)) {
+                    //SUMA
+                    double[][] matrizR = new double[matriz1.length][matriz1[0].length];
+                    for (int i = 0; i < matriz1.length; i++) {
+                        for (int j = 0; j < matriz1[i].length; j++) {
+                            matrizR[i][j] = matriz1[i][j] + matriz2[i][j];
+                        }
 
                     }
+
+                    //IMPRIMIR MATRIZ SUMA
                     System.out.println("");
-                }
+                    System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+                    System.out.println("");
+                    for (int i = 0; i < matrizR.length; i++) {
+                        for (int j = 0; j < matrizR[i].length; j++) {
+                            System.out.print("[" + matrizR[i][j] + "]");
 
-                System.out.println();
-                rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
-                set_matrizR(matrizR);
+                        }
+                        System.out.println("");
+                    }
+
+                    System.out.println();
+                    rep.add_suma(matriz1, matriz2, matrizR, Letra, Letra2);
+                    set_matrizR(matrizR);
+                }
             }
         }
 
@@ -359,7 +370,7 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+                        System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
 
@@ -381,7 +392,7 @@ public class Main {
                         }
                         //IMPRIMIR MATRIZ SUMA
                         System.out.println("");
-                        System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+                        System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                         System.out.println("");
                         imprimir_matriz(matrizR);
 
@@ -409,16 +420,9 @@ public class Main {
 
                 //IMPRIMIR MATRIZ SUMA
                 System.out.println("");
-                System.out.println("La suma de las matrices " + Letra + " y " + Letra2 + " es:");
+                System.out.println("La resta de las matrices " + Letra + " y " + Letra2 + " es:");
                 System.out.println("");
-                for (int i = 0; i < matrizR.length; i++) {
-                    for (int j = 0; j < matrizR[i].length; j++) {
-                        System.out.print("[" + matrizR[i][j] + "]");
-
-                    }
-                    System.out.println("");
-                }
-
+               imprimir_matriz(matrizR);
                 System.out.println();
                 rep.add_resta(matriz1, matriz2, matrizR, Letra, Letra2);
                 set_matrizR(matrizR);
@@ -562,7 +566,7 @@ public class Main {
                 System.out.println("");
                 System.out.println("La multiplicacion de la matriz " + Letra + " con el número " + Numero + " es:");
                 System.out.println("");
-                imprimir_matriz(Matriz_R);
+                imprimir_matriz(matrizR);
                 rep.add_multi_numero(Matriz_R, matrizR, Letra, Numero);
                 set_matrizR(matrizR);
             }
@@ -1592,8 +1596,25 @@ public class Main {
         }
     }
 
-    public static int comprobar_duplicidad(String [] matriz){
-        int fila =-1;
+    public static int comprobar_duplicidad( char identificador){
+        int fila =0;
+        boolean encontrado = false;
+
+        int auxiliar = -1;
+
+        for (int i = 0; i < matrices.length && i<26; i++) {
+            char a[] = matrices[i].toCharArray();
+
+            for (int j = 0; j < a.length; j++) {
+                if (a[j] == identificador && Character.isAlphabetic(identificador)) {
+                    encontrado = true;
+                    fila = i;
+                    auxiliar++;
+                }
+
+            }
+
+        }
 
         return fila;
     }
