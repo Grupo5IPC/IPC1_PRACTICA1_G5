@@ -166,7 +166,7 @@ public class Reportes {
                             "    transition: 1s;\n" +
                             "}\n" +
                             "div {\n" +
-                            "    display: block;\n" +
+                            "    display: block; text-align:center;\n" +
                             "}\n" +
                             ".clearfix {\n" +
                             "    float: none;\n" +
@@ -263,7 +263,7 @@ public class Reportes {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
-                    "    <div class=\"row\">\n" +
+                    "    <hr><div class=\"row\">\n" +
                     "      <div class=\"col-sm-12  \">\n" +
                     "\n" +
                     "        <h1> Suma de matrices: " + identificador1 + "+" + identificador2 + "</h1>\n" +
@@ -302,7 +302,7 @@ public class Reportes {
 
             }
 
-            auxiliar2 += "\n</table>\n</div>\n</div>";
+            auxiliar2 += "\n</table>\n</div>\n</div> ";
             fn.write(auxiliar2);
             String contr = "<div class=\"row\"><div class=\"col-sm-12  text-center \" >\n <h3>Matriz R</h3>" +
                     " <table >\n" +
@@ -318,7 +318,7 @@ public class Reportes {
                 contr += "\n</tr>";
 
             }
-            contr += "\n</table>\n</div>\n</div>";
+            contr += "\n</table>\n</div>\n</div><hr>";
             fn.write(contr);
             fn.close();
 
@@ -332,10 +332,10 @@ public class Reportes {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
-                    "    <div class=\"row\">\n" +
+                    "   <hr> <div class=\"row\">\n" +
                     "      <div class=\"col-sm-12  \">\n" +
                     "\n" +
-                    "        <h1> Resta de matrices: " + identificador1 + "-" + identificador2 + "</h1>\n" +
+                    "        <h1> Resta de matrices: " + identificador1 + " - " + identificador2 + "</h1>\n" +
                     "  \n" +
                     "      </div>\n" +
                     "    </div>\n" +
@@ -387,7 +387,7 @@ public class Reportes {
                 contr += "\n</tr>";
 
             }
-            contr += "\n</table>\n</div>\n</div>";
+            contr += "\n</table>\n</div>\n</div><hr>";
             fn.write(contr);
             fn.close();
 
@@ -401,7 +401,7 @@ public class Reportes {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
-                    "    <div class=\"row\">\n" +
+                    "  <hr>  <div class=\"row\">\n" +
                     "      <div class=\"col-sm-12  \">\n" +
                     "\n" +
                     "        <h1> Multiplicación de matrices: " + identificador1 + "*" + identificador2 + "</h1>\n" +
@@ -456,7 +456,7 @@ public class Reportes {
                 contr += "\n</tr>";
 
             }
-            contr += "\n</table>\n</div>\n</div>";
+            contr += "\n</table>\n</div>\n</div> <hr>";
             fn.write(contr);
             fn.close();
 
@@ -470,7 +470,7 @@ public class Reportes {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
-                    "    <div class=\"row\">\n" +
+                    "    <hr><div class=\"row\">\n" +
                     "      <div class=\"col-sm-12  \">\n" +
                     "\n" +
                     "        <h1> Multiplicación de matrices: " + identificador1 + "*" + numero+ "</h1>\n" +
@@ -480,7 +480,7 @@ public class Reportes {
                     "\n" +
                     "    <br>\n" +
                     "    <div class=\"row\">\n" +
-                    "    <div class=\"col-sm-6 text-center \" >\n <h3>Matriz " + identificador1 + "</h3>" +
+                    "    <div class=\"col-sm-12 text-center \" >\n <h3>Matriz " + identificador1 + "</h3>" +
                     "    <table > ";
             for (int i = 0; i < matriz1.length; i++) {
                 auxiliar1 += "\n<tr>";
@@ -491,7 +491,7 @@ public class Reportes {
                 }
                 auxiliar1 += "\n</tr>";
             }
-            auxiliar1 += "\n</table>\n</div>";
+            auxiliar1 += "\n</table>\n</div> </div>";
             fn.write(auxiliar1);
 
 
@@ -509,7 +509,7 @@ public class Reportes {
                 contr += "\n</tr>";
 
             }
-            contr += "\n</table>\n</div>\n</div>";
+            contr += "\n</table>\n</div>\n</div><hr>";
             fn.write(contr);
             fn.close();
 
@@ -524,7 +524,7 @@ public class Reportes {
             try {
                 FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
                 String auxiliar1 = "" +
-                        "    <div class=\"row\">\n" +
+                        "    <hr><div class=\"row\">\n" +
                         "      <div class=\"col-sm-12  \">\n" +
                         "\n" +
                         "        <h1> Transpuesta de matrices</h1>\n" +
@@ -566,7 +566,7 @@ public class Reportes {
                     auxiliar2 += "\n</tr>";
 
                 }
-                auxiliar2 += "\n</table>\n</div>\n</div>";
+                auxiliar2 += "\n</table>\n</div>\n</div><hr>";
                 fn.write(auxiliar2);
                 fn.close();
             } catch (Exception e) {
@@ -579,7 +579,7 @@ public class Reportes {
         try {
             FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
             String auxiliar1 = "" +
-                    "    <div class=\"row\">\n" +
+                    "   <hr> <div class=\"row\">\n" +
                     "      <div class=\"col-sm-12  \">\n" +
                     "\n" +
                     "        <h1> Inversa de matrices</h1>\n" +
@@ -621,7 +621,7 @@ public class Reportes {
                 auxiliar2 += "\n</tr>";
 
             }
-            auxiliar2 += "\n</table>\n</div>\n</div>";
+            auxiliar2 += "\n</table>\n</div>\n</div><hr>";
             fn.write(auxiliar2);
             fn.close();
         } catch (Exception e) {
@@ -629,6 +629,167 @@ public class Reportes {
         }
 
     }
+    public void add_determinante(double [][] matriz, double det, char identificador1){
+        try {
+            FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
+            String auxiliar1 = "" +
+                    "   <hr> <div class=\"row\">\n" +
+                    "      <div class=\"col-sm-12  \">\n" +
+                    "\n" +
+                    "        <h1> Determinante de matrices</h1>\n" +
+
+                    "  \n" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "\n" +
+
+                    "    <div class=\"row\">\n " +
+
+                    "    <div class=\"col-sm-12  text-center \" style=\"overflow-x:auto;\">\n <h3>El determinante de la Matriz "+identificador1+" es : "+det+"</h3>" +
+                    "    <table > ";
+            for (int i = 0; i < matriz.length; i++) {
+                auxiliar1 += "\n<tr>";
+                for (int j = 0; j < matriz[0].length; j++) {
+                    auxiliar1 += "\n<td>";
+                    auxiliar1 += matriz[i][j];
+                    auxiliar1 += "\n</td>";
+                }
+                auxiliar1 += "\n</tr>";
+
+            }
+            auxiliar1 += "\n</table>\n</div>";
+            fn.write(auxiliar1);
+
+
+
+            fn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void add_división(double[][] matriz1, double[][] matriz2, double[][] matrizR, char identificador1, char identificador2){
+        try {
+            FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
+            String auxiliar1 = "" +
+                    "    <hr><div class=\"row\">\n" +
+                    "      <div class=\"col-sm-12  \">\n" +
+                    "\n" +
+                    "        <h1> Division de matrices: " + identificador1 + " / " + identificador2 + "</h1>\n" +
+                    "  \n" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "\n" +
+                    "    <br>\n" +
+                    "    <div class=\"row\">\n" +
+                    "    <div class=\"col-sm-6 text-center \" >\n <h3>Matriz " + identificador1 + "</h3>" +
+                    "    <table > ";
+            for (int i = 0; i < matriz1.length; i++) {
+                auxiliar1 += "\n<tr>";
+                for (int j = 0; j < matriz1[0].length; j++) {
+                    auxiliar1 += "\n<td>";
+                    auxiliar1 += matriz1[i][j];
+                    auxiliar1 += "\n</td>";
+                }
+                auxiliar1 += "\n</tr>";
+            }
+            auxiliar1 += "\n</table>\n</div>";
+            fn.write(auxiliar1);
+            String auxiliar2 = "<div class=\"col-sm-6 text-center \" >\n <h3>Matriz "+identificador2+"</h3>" +
+                    " <table >\n" +
+
+                    "<tr>\n";
+
+            for (int i = 0; i < matriz2.length; i++) {
+                auxiliar2 += "\n<tr>";
+                for (int j = 0; j < matriz2[0].length; j++) {
+                    auxiliar2 += "\n<td>";
+                    auxiliar2 += matriz2[i][j];
+                    auxiliar2 += "\n</td>";
+                }
+                auxiliar2 += "\n</tr>";
+
+            }
+
+            auxiliar2 += "\n</table>\n</div>\n</div> ";
+            fn.write(auxiliar2);
+            String contr = "<div class=\"row\"><div class=\"col-sm-12  text-center \" >\n <h3>Matriz R</h3>" +
+                    " <table >\n" +
+
+                    "<tr>\n";
+            for (int i = 0; i < matrizR.length; i++) {
+                contr += "\n<tr>";
+                for (int j = 0; j < matrizR[0].length; j++) {
+                    contr += "\n<td>";
+                    contr += matrizR[i][j];
+                    contr += "\n</td>";
+                }
+                contr += "\n</tr>";
+
+            }
+            contr += "\n</table>\n</div>\n</div><hr>";
+            fn.write(contr);
+            fn.close();
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+    public void add_potencia(double[][] matriz,double [][] matrizR, int numero, char identificador1){
+        try {
+            FileWriter fn = new FileWriter("Reportes/" + n_reporte + ".html", true);
+            String auxiliar1 = "" +
+                    "    <hr><div class=\"row\">\n" +
+                    "      <div class=\"col-sm-12  \">\n" +
+                    "\n" +
+                    "        <h1> Potencia de matrices</h1>\n" +
+
+                    "  \n" +
+                    "      </div>\n" +
+                    "    </div>\n" +
+                    "\n" +
+
+                    "    <div class=\"row\">\n " +
+
+                    "    <div class=\"col-sm-6  text-center \" style=\"overflow-x:auto;\">\n <h3>Matriz "+identificador1+"</h3>" +
+                    "    <table > ";
+            for (int i = 0; i < matriz.length; i++) {
+                auxiliar1 += "\n<tr>";
+                for (int j = 0; j < matriz[0].length; j++) {
+                    auxiliar1 += "\n<td>";
+                    auxiliar1 += matriz[i][j];
+                    auxiliar1 += "\n</td>";
+                }
+                auxiliar1 += "\n</tr>";
+
+            }
+            auxiliar1 += "\n</table>\n</div>";
+            fn.write(auxiliar1);
+
+
+            String auxiliar2 = "<div class=\"col-sm-6  text-center \" style=\"overflow-x:auto;\">\n <h3>Matriz "+identificador1+"<sup>"+numero+"</sup></h3>" +
+                    " <table >\n" +
+
+                    "<tr>\n";
+            for (int i = 0; i < matrizR.length; i++) {
+                auxiliar2 += "\n<tr>";
+                for (int j = 0; j < matrizR[0].length; j++) {
+                    auxiliar2 += "\n<td>";
+                    auxiliar2 += matrizR[i][j];
+                    auxiliar2 += "\n</td>";
+                }
+                auxiliar2 += "\n</tr>";
+
+            }
+            auxiliar2 += "\n</table>\n</div>\n</div><hr>";
+            fn.write(auxiliar2);
+            fn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 
 }
 
