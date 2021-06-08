@@ -10,6 +10,7 @@ import java.util.Calendar;
  */
 public class Reportes {
     public String n_reporte;
+
     public boolean m_ing = false;
 
     public Reportes() {
@@ -20,6 +21,7 @@ public class Reportes {
         int hora = fecha.get(Calendar.HOUR_OF_DAY);
         int minutos = fecha.get(Calendar.MINUTE);
         n_reporte = dia + "-" + mes + "-" + year + " " + hora + "." + minutos;
+
         try {
             File directorio = new File("Reportes");
             if (!directorio.exists()) {
@@ -225,7 +227,8 @@ public class Reportes {
                             "    padding: 15px;\n"
                             + " border-spacing: 0;" +
                             "\n" +
-                            "} tr:nth-child(even){background-color: #f2f2f2}div.col-ms-6,div.col-ms-4,div.col-ms-3,{overflow-x:auto;}";
+                            "} tr:nth-child(even){background-color: #f2f2f2}div.col-ms-6,div.col-ms-4,div.col-ms-3,{overflow-x:auto;}"
+                            +".Titulo{background:black;color:White!important}";
                     fn.write(cont);
                     fn.close();
 
@@ -251,7 +254,10 @@ public class Reportes {
                     "    <link rel=\"stylesheet\" href=\"css/style.css\">\n" +
                     "    <title>Reporte</title>\n" +
                     "</head>\n" +
-                    "<body>\n";
+                    "<body>\n"+
+                    "<div class=\"Titulo\" row><div class=\"col-sm-12\"><h1>Reporte "+n_reporte+"</h1</div></div>" +
+                    "<h1>"+
+                    "</div";
             fn.write(cont);
             fn.close();
         } catch (Exception e) {
