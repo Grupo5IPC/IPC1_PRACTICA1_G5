@@ -220,7 +220,11 @@ public class Main {
                 //imprimir_matriz(matriz);
                 return matriz;
             } else {
-                System.out.println("No se ha encontrado la matriz");
+                if (identificador=='R'){
+
+                }else {
+                    System.out.println("No se ha encontrado la matriz");
+                }
                 return null;
             }
         }
