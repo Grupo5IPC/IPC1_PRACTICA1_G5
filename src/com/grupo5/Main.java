@@ -826,13 +826,9 @@ public class Main {
                             }
                             System.out.println("\n La Matriz Inversa de " + Letra + " es: ");
                             System.out.println("");
-                            for (int i = 0; i < matrizInv.length; i++) {
-                                for (int j = 0; j < matrizInv[i].length; j++) {
-                                    System.out.print(matrizInv[i][j] + "\t");
-                                }
-                                System.out.println("");
-                            }
-                            System.out.println("");
+                            imprimir_matriz(matrizInv);
+                            rep.add_inversa(Matriz_R,matrizInv,Letra);
+                            set_matrizR(matrizInv);
                         }
 
                         //MATRICES 2X2
@@ -1069,6 +1065,7 @@ public class Main {
                     double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
                     System.out.println("\n El Determinante de la matriz " + Letra + " es = " + Det);
                     System.out.println("");
+                    rep.add_determinante(Matriz_R, Det,Letra);
                 } else {
                     System.out.println("\nLa matriz seleccionada no es cuadrada o es mayor a 3x3");
                 }
@@ -1117,6 +1114,7 @@ public class Main {
                     double Det = ((Diagonal + Diagonal2 + Diagonal3) - (Diagonal4 + Diagonal5 + Diagonal6));
                     System.out.println("\n El Determinante de la matriz " + Letra + " es = " + Det);
                     System.out.println("");
+                    rep.add_determinante(matriz1,Det,Letra);
                 } else {
                     System.out.println("\nLa matriz seleccionada no es cuadrada o es mayor a 3x3");
                 }
@@ -1246,16 +1244,17 @@ public class Main {
                                     }
                                 }
                             }
+                            System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                            System.out.println("");
+                            imprimir_matriz(matrizR);
+                            rep.add_división(Matriz_R,matriz2,matrizR,Letra,Letra2);
+                            set_matrizR(matrizR);
+                            System.out.println("");
                         } else {
                             System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                         }
 
-                        System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
-                        System.out.println("");
-                        imprimir_matriz(matrizR);
-                        rep.add_división(Matriz_R,matriz2,matrizR,Letra,Letra2);
-                        set_matrizR(matrizR);
-                        System.out.println("");
+
                     }
                 }
             } else if (Letra2 == 'R') {
@@ -1367,16 +1366,17 @@ public class Main {
                                     }
                                 }
                             }
+                            System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                            System.out.println("");
+                            imprimir_matriz(matrizR);
+                            rep.add_división(matriz1,Matriz_R,matrizR,Letra,Letra2);
+                            set_matrizR(matrizR);
+                            System.out.println("");
                         } else {
                             System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                         }
 
-                        System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
-                        System.out.println("");
-                        imprimir_matriz(matrizR);
-                        rep.add_división(matriz1,Matriz_R,matrizR,Letra,Letra2);
-                        set_matrizR(matrizR);
-                        System.out.println("");
+
                     }
                 }
             }
@@ -1489,16 +1489,18 @@ public class Main {
                                 }
                             }
                         }
-                    } else {
+                        System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
+                        System.out.println("");
+                        imprimir_matriz(matrizR);
+                        rep.add_división(matriz1,matriz2,matrizR,Letra,Letra2);
+                        set_matrizR(matrizR);
+                        System.out.println("");
+                    }
+                    else {
                         System.out.println("No se pueden operar las matrices seleccionadas porque no corresponden sus dimensiones");
                     }
 
-                    System.out.println("\n La división entre la matriz " + Letra + " y la matriz " + Letra2 + " es: ");
-                    System.out.println("");
-                    imprimir_matriz(matrizR);
-                    rep.add_división(matriz1,matriz2,matrizR,Letra,Letra2);
-                    set_matrizR(matrizR);
-                    System.out.println("");
+
                 }
             }
         }
@@ -1679,6 +1681,10 @@ public class Main {
     }
 //-------------------------------------------------------------------------------------------------------------
     // FUNCIONES AUXILIARES
+
+
+
+
 
     public static void imprimir_matriz(double[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
